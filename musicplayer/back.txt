@@ -1,0 +1,249 @@
+﻿
+        readonly private Player player;
+        readonly private AsyncQueue<MessageTopic> MessageQueue;
+
+            MessageQueue = new();
+            player = new(MessageQueue);
+            _ = MessageCustomerAsync();
+
+private async void AddToQueue(object sender, RoutedEventArgs e)
+        {
+            var result = await Music.CreateMusicAsync(UrlTextBox.Text);
+            player.AddQueue(result);
+        }
+        private void VolumeChange(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            player.Volume(((Slider)sender).Value);
+        }
+        private void ToggleLoopMode(object sender, RoutedEventArgs e)
+        {
+            var btn = (Button)sender;
+            btn.Content = FindResource(player.ChangeLoopMode());
+        }
+        private void Shuffle(object sender, RoutedEventArgs e)
+        {
+            player.Shuffle();
+        }
+        private void VolumeMute(object sender, RoutedEventArgs e)
+        {
+            if (player.muted == false)
+            {
+                player.Volume(null, true);
+            }
+            else
+            {
+                player.Volume(VolumeBar.Value);
+            }
+        }
+
+        readonly static List<int> PositionChange_PositionList = new();
+        private void PositionChange(object sender, RoutedEventArgs e)
+        {
+            Slider bar = (Slider)sender;
+            if (bar.IsMouseCaptureWithin)
+            {
+                PositionChange_PositionList.Add((int)bar.Value);
+            }
+        }
+        private void Back(object sender, RoutedEventArgs e)
+        {
+            player.Back();
+        }
+        private void PlayPause(object sender, RoutedEventArgs e)
+        {
+            player.Pause();
+        }
+        private void Next(object sender, RoutedEventArgs e)
+        {
+            player.Next();
+        }
+        private async Task MessageCustomerAsync()
+        {
+            MessageTopic topic;
+            while (true)
+            {
+                topic = await MessageQueue.DequeueAsync();
+                switch (topic)
+                {
+                    case MessageTopic.QueueUpdate:
+                        {
+                            QueueList.Children.Clear();
+                            var Queue = player.GetQueue();
+                            for (int i = 0; i < Queue.Count; i++)
+                            {
+                                var music = Queue[i];
+
+                                Grid grid = new();
+                                grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(1, GridUnitType.Star) });
+                                grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(8, GridUnitType.Star) });
+                                grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(1, GridUnitType.Star) });
+                                grid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(1, GridUnitType.Star) });
+                                grid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(1, GridUnitType.Star) });
+
+                                Image image = new()
+                                {
+                                    Source = new BitmapImage(music.Thumbnails)
+                                };
+                                Button PressToPlayBtn = new()
+                                {
+                                    BorderThickness = new Thickness(0),
+                                    Content = image,
+                                    Height = 30,
+                                    Width = 50,
+                                    Tag = i,
+                                    Background = new SolidColorBrush(Colors.White)
+                                    {
+                                        Opacity = 0
+                                    },
+                                };
+                                PressToPlayBtn.Click += PressToPlay;
+                                Grid.SetColumn(PressToPlayBtn, 0);
+                                Grid.SetRow(PressToPlayBtn, 0);
+                                Grid.SetRowSpan(PressToPlayBtn, 2);
+                                grid.Children.Add(PressToPlayBtn);
+
+                                ScrollViewer TitleViewer = new()
+                                {
+                                    Content = new TextBlock()
+                                    {
+                                        Text = music.Title
+                                    },
+                                    VerticalScrollBarVisibility = ScrollBarVisibility.Hidden,
+                                    HorizontalScrollBarVisibility = ScrollBarVisibility.Hidden,
+                                };
+                                TitleViewer.MouseEnter += ScrollToEnd;
+                                Label title = new()
+                                {
+                                    Content = TitleViewer,
+                                    MaxWidth = 180
+                                };
+                                Grid.SetColumn(title, 1);
+                                Grid.SetRow(title, 0);
+                                grid.Children.Add(title);
+
+                                ScrollViewer ArtistViewer = new()
+                                {
+                                    Content = new TextBlock()
+                                    {
+                                        Text = music.Artist
+                                    },
+                                    VerticalScrollBarVisibility = ScrollBarVisibility.Hidden,
+                                    HorizontalScrollBarVisibility = ScrollBarVisibility.Hidden,
+                                };
+                                TitleViewer.MouseEnter += ScrollToEnd;
+                                Label artist = new()
+                                {
+                                    Content = ArtistViewer,
+                                    MaxWidth = 180
+                                };
+                                Grid.SetColumn(artist, 1);
+                                Grid.SetRow(artist, 1);
+                                grid.Children.Add(artist);
+
+                                Label duration = new()
+                                {
+                                    Content = music.Duration
+                                };
+                                Grid.SetColumn(duration, 2);
+                                Grid.SetRow(duration, 0);
+                                Grid.SetRowSpan(duration, 2);
+                                grid.Children.Add(duration);
+
+                                QueueList.Children.Add(grid);
+                            }
+                            break;
+                        }
+                    case MessageTopic.PlayingUpdate:
+                        {
+                            if (player.nowPlaying is null)
+                            {
+                                PicViewer.Opacity = 0;
+                                PlayPositionBar.Value = 0;
+                                PlayPositionBar.IsEnabled = false;
+                            }
+                            else
+                            {
+                                PicViewer.Opacity = 1;
+                                PlayPositionBar.IsEnabled = true;
+                                PlayPositionBar.Maximum = player.nowPlaying.Duration.TotalSeconds;
+                                PicViewer.Source = new BitmapImage(player.nowPlaying.Thumbnails);
+                            }
+                            break;
+                        }
+                    case MessageTopic.StatusUpdate:
+                        {
+                            var target = player.status switch
+                            {
+                                PlayStatus.Play => "Pause",
+                                PlayStatus.Pause => "Play",
+                                PlayStatus.NotPlaying => "Play",
+                                _ => "ERROR"
+                            };
+                            PlayButton.Content = FindResource(target);
+                            break;
+                        }
+                    case MessageTopic.VolumeChange:
+                        {
+                            var target = player.muted ? "VolumeMute" :
+                                VolumeBar.Value switch
+                                {
+                                    <= 0 => "VolumeMute",
+                                    < 0.3 => "VolumeLow",
+                                    < 0.7 => "VolumeMedium",
+                                    _ => "VolumeHigh",
+                                };
+                            MuteBtn.Content = FindResource(target);
+                            break;
+                        }
+                    case MessageTopic.TickUpdate:
+                        {
+                            if (!PlayPositionBar.IsMouseCaptureWithin)
+                            {
+                                if (!PlayPositionBar.IsEnabled)
+                                {
+                                    PlayPositionBar.Value = 0;
+                                }
+                                else if (PositionChange_PositionList.Count > 0)
+                                {
+                                    player.Position(new TimeSpan(0, 0, PositionChange_PositionList.Last()));
+                                    PositionChange_PositionList.Clear();
+                                }
+                                else
+                                {
+                                    PlayPositionBar.Value = player.Position().TotalSeconds;
+                                }
+                            }
+                            break;
+                        }
+                    default:
+                        break;
+                }
+            }
+        }
+        static async void ScrollToEnd(object sender, RoutedEventArgs e)
+        {
+            ScrollViewer scrollViewer = (ScrollViewer)sender;
+            double pos = 0;
+            if (scrollViewer.ExtentWidth > 180)
+            {
+                while (scrollViewer.IsMouseOver)
+                {
+                    await Task.Delay(1);
+                    if (pos > scrollViewer.ExtentWidth - 120)
+                    {
+                        scrollViewer.ScrollToLeftEnd();
+                        pos = -50;
+                    }
+                    pos += 1;
+                    scrollViewer.ScrollToHorizontalOffset(pos);
+                    Console.WriteLine(scrollViewer.HorizontalOffset);
+                }
+                scrollViewer.ScrollToLeftEnd();
+            }
+        }
+        private void PressToPlay(object sender, RoutedEventArgs e)
+        {
+            Button btn = (Button)sender;
+            player.index = Convert.ToInt32(btn.Tag);
+            player.Next();
+        }

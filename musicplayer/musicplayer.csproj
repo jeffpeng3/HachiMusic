@@ -1,0 +1,89 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="image\Back.png" />
+    <None Remove="image\LoopAll.png" />
+    <None Remove="image\LoopAll.svg" />
+    <None Remove="image\LoopNone.png" />
+    <None Remove="image\LoopSingle.png" />
+    <None Remove="image\NoShuffle.png" />
+    <None Remove="image\Pause.png" />
+    <None Remove="image\Play.png" />
+    <None Remove="image\Shuffle.png" />
+    <None Remove="image\Stop.png" />
+    <None Remove="image\VolumeHigh.png" />
+    <None Remove="image\VolumeLow.png" />
+    <None Remove="image\VolumeMedium.png" />
+    <None Remove="image\VolumeMute.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Remove="TextFile1.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\.editorconfig" Link=".editorconfig" />
+    <None Include="TextFile1.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Threading" Version="17.2.32" />
+    <PackageReference Include="Nito.Collections.Deque" Version="1.1.1" />
+    <PackageReference Include="WPF-UI" Version="2.0.2" />
+    <PackageReference Include="YoutubeExplode" Version="6.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="image\Back.png" />
+    <Resource Include="image\LoopAll.png" />
+    <Resource Include="image\LoopNone.png" />
+    <Resource Include="image\LoopSingle.png" />
+    <Resource Include="image\Pause.png" />
+    <Resource Include="image\Play.png" />
+    <Resource Include="image\Shuffle.png" />
+    <Resource Include="image\VolumeHigh.png" />
+    <Resource Include="image\VolumeLow.png" />
+    <Resource Include="image\VolumeMedium.png" />
+    <Resource Include="image\VolumeMute.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="image\Next.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,152 @@
+﻿<ui:UiWindow
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:musicplayer"
+        xmlns:System="clr-namespace:System;assembly=System.Runtime" x:Name="uiWindow"
+        xmlns:pages="clr-namespace:musicplayer.Pages"
+    
+        Background="Transparent"
+        ExtendsContentIntoTitleBar ="True"
+        x:Class="musicplayer.MainWindow"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="600" Width="700" WindowCornerPreference="Round" MouseLeftButtonDown="WindowMove">
+    <ui:UiWindow.Resources>
+        <ui:SymbolIcon x:Key="window_dismiss" Symbol="Dismiss16"/>
+        <ui:SymbolIcon x:Key="window_maximize" Symbol="Maximize16"/>
+        <ui:SymbolIcon x:Key="window_normalize" Symbol="SquareMultiple16"/>
+        <ui:SymbolIcon x:Key="window_minimize" Symbol="Subtract16"/>
+        <ui:SymbolIcon x:Key="menu_right" Symbol="PaddingRight20"/>
+
+        <Style x:Key="ForMaxOrNormal" TargetType="{x:Type ui:Button}" BasedOn="{StaticResource {x:Type ui:Button}}">
+            <Setter Property="Content" Value="{DynamicResource window_maximize}"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding WindowState, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" Value="Normal">
+                    <Setter Property="Content" Value="{DynamicResource window_maximize}" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding WindowState, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" Value="Maximized">
+                    <Setter Property="Content" Value="{DynamicResource window_normalize}" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="ForPad" TargetType="{x:Type ui:Button}" BasedOn="{StaticResource {x:Type ui:Button}}">
+            <Setter Property="Content" Value="{DynamicResource menu_left}"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsPadOpen, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}" Value="true">
+                    <Setter Property="Content" Value="{DynamicResource menu_left}" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding IsPadOpen, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}" Value="false">
+                    <Setter Property="Content" Value="{DynamicResource menu_right}" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+
+    </ui:UiWindow.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <!--should be const after close button created-->
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="48"/>
+            <!--should be const after close button created-->
+            <RowDefinition Height="*" />
+            <RowDefinition Height="80" />
+            <!--should be const after dashboard created-->
+        </Grid.RowDefinitions>
+        <!--
+            <RowDefinition Height="1*" />
+        -->
+
+        <!--  <ui:Button Style="{StaticResource ForPad}" Click="PadOpenOrClose">
+            <ui:Button.Margin>5,5,10,5</ui:Button.Margin>
+            <ui:Button.Padding>0</ui:Button.Padding>
+            <Grid.Column>0</Grid.Column>
+            <ui:Button.BorderThickness>0</ui:Button.BorderThickness>
+            <ui:Button.Background>Transparent</ui:Button.Background>
+            <ui:Button.HorizontalAlignment>right</ui:Button.HorizontalAlignment>
+        </ui:Button>-->
+
+        <Grid>
+            <Grid.Column>1</Grid.Column>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <ui:TextBox>
+                <ui:TextBox.Margin>5,10,5,5</ui:TextBox.Margin>
+                <ui:TextBox.Icon>search12</ui:TextBox.Icon>
+                <ui:TextBox.PlaceholderText>輸入網址或要查詢的音樂</ui:TextBox.PlaceholderText>
+            </ui:TextBox>
+
+            <ui:Button Click="WindowClose">
+                <ui:Button.Margin>5,5,10,5</ui:Button.Margin>
+                <ui:Button.Padding>0</ui:Button.Padding>
+                <Grid.Column>3</Grid.Column>
+                <ui:Button.Background>red</ui:Button.Background>
+                <DynamicResource ResourceKey="window_dismiss"/>
+            </ui:Button>
+            <ui:Button Style="{StaticResource ForMaxOrNormal}" Click="WindowMaxOrNormal">
+                <ui:Button.Margin>5</ui:Button.Margin>
+                <ui:Button.Padding>0</ui:Button.Padding>
+                <Grid.Column>2</Grid.Column>
+                <ui:Button.Background>orange</ui:Button.Background>
+            </ui:Button>
+            <ui:Button Click="WindowMin">
+                <ui:Button.Margin>5</ui:Button.Margin>
+                <ui:Button.Padding>0</ui:Button.Padding>
+                <Grid.Column>1</Grid.Column>
+                <ui:Button.Background>green</ui:Button.Background>
+                <DynamicResource ResourceKey="window_minimize"/>
+            </ui:Button>
+        </Grid>
+
+        <ui:NavigationCompact Frame="{Binding ElementName=RootFrame}">
+            <Grid.Row>0</Grid.Row>
+            <Grid.RowSpan>3</Grid.RowSpan>
+            <ui:NavigationCompact.MaxWidth>130</ui:NavigationCompact.MaxWidth>
+            <ui:NavigationCompact.Items>
+                <ui:NavigationItem PageType="{x:Type pages:MainPage}">
+                    <ui:NavigationItem.IsEnabled>false</ui:NavigationItem.IsEnabled>
+                    <ui:NavigationItem.Cache>false</ui:NavigationItem.Cache>
+                    <ui:NavigationItem.Icon>MusicNote220</ui:NavigationItem.Icon>
+                    <ui:NavigationItem.Content>HachiMusic</ui:NavigationItem.Content>
+                </ui:NavigationItem>
+                <ui:NavigationItem PageType="{x:Type pages:MainPage}">
+                    <ui:NavigationItem.Cache>true</ui:NavigationItem.Cache>
+                    <ui:NavigationItem.Icon>home24</ui:NavigationItem.Icon>
+                    <ui:NavigationItem.Content>home</ui:NavigationItem.Content>
+                    <ui:NavigationItem.PageTag>Home</ui:NavigationItem.PageTag>
+                </ui:NavigationItem>
+                <ui:NavigationItem PageType="{x:Type pages:MainPage}">
+                    <ui:NavigationItem.Cache>true</ui:NavigationItem.Cache>
+                    <ui:NavigationItem.Icon>earth24</ui:NavigationItem.Icon>
+                    <ui:NavigationItem.Content>Discover</ui:NavigationItem.Content>
+                    <ui:NavigationItem.PageTag>Discover</ui:NavigationItem.PageTag>
+                </ui:NavigationItem>
+                <ui:NavigationSeparator />
+            </ui:NavigationCompact.Items>
+            <ui:NavigationCompact.Footer>
+                <ui:NavigationItem PageType="{x:Type pages:MainPage}">
+                    <ui:NavigationItem.Cache>true</ui:NavigationItem.Cache>
+                    <ui:NavigationItem.Icon>PersonCircle24</ui:NavigationItem.Icon>
+                    <ui:NavigationItem.Content>User</ui:NavigationItem.Content>
+                    <ui:NavigationItem.PageTag>User</ui:NavigationItem.PageTag>
+                </ui:NavigationItem>
+            </ui:NavigationCompact.Footer>
+        </ui:NavigationCompact>
+
+        <Frame
+            x:Name="RootFrame"
+            Grid.Row="1"
+            Grid.Column="1"/>
+    </Grid>
+</ui:UiWindow>
+

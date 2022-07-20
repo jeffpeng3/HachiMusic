@@ -1,0 +1,7 @@
+﻿[*.cs]
+
+# VSTHRD100: Avoid async void methods
+dotnet_diagnostic.VSTHRD100.severity = silent
+
+# CS1998: Async 方法缺乏 'await' 運算子，將同步執行
+dotnet_diagnostic.CS1998.severity = silent
