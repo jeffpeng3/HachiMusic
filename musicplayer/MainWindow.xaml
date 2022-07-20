@@ -12,7 +12,7 @@
         ExtendsContentIntoTitleBar ="True"
         x:Class="musicplayer.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="700" WindowCornerPreference="Round" MouseLeftButtonDown="WindowMove">
+        Title="MainWindow" Height="850" Width="900" WindowCornerPreference="Round" MouseLeftButtonDown="WindowMove">
     <ui:UiWindow.Resources>
         <ui:SymbolIcon x:Key="window_dismiss" Symbol="Dismiss16"/>
         <ui:SymbolIcon x:Key="window_maximize" Symbol="Maximize16"/>
@@ -56,7 +56,7 @@
             <RowDefinition Height="48"/>
             <!--should be const after close button created-->
             <RowDefinition Height="*" />
-            <RowDefinition Height="80" />
+            <RowDefinition Height="120" />
             <!--should be const after dashboard created-->
         </Grid.RowDefinitions>
         <!--
@@ -108,14 +108,18 @@
             </ui:Button>
         </Grid>
 
+        <Frame
+            x:Name="RootFrame"
+            Grid.Row="1"
+            Grid.Column="1"/>
         <ui:NavigationCompact Frame="{Binding ElementName=RootFrame}">
             <Grid.Row>0</Grid.Row>
             <Grid.RowSpan>3</Grid.RowSpan>
             <ui:NavigationCompact.MaxWidth>130</ui:NavigationCompact.MaxWidth>
+            <ui:NavigationCompact.SelectedPageIndex>1</ui:NavigationCompact.SelectedPageIndex>
             <ui:NavigationCompact.Items>
-                <ui:NavigationItem PageType="{x:Type pages:MainPage}">
+                <ui:NavigationItem>
                     <ui:NavigationItem.IsEnabled>false</ui:NavigationItem.IsEnabled>
-                    <ui:NavigationItem.Cache>false</ui:NavigationItem.Cache>
                     <ui:NavigationItem.Icon>MusicNote220</ui:NavigationItem.Icon>
                     <ui:NavigationItem.Content>HachiMusic</ui:NavigationItem.Content>
                 </ui:NavigationItem>
@@ -125,7 +129,7 @@
                     <ui:NavigationItem.Content>home</ui:NavigationItem.Content>
                     <ui:NavigationItem.PageTag>Home</ui:NavigationItem.PageTag>
                 </ui:NavigationItem>
-                <ui:NavigationItem PageType="{x:Type pages:MainPage}">
+                <ui:NavigationItem PageType="{x:Type pages:DiscoverPage}">
                     <ui:NavigationItem.Cache>true</ui:NavigationItem.Cache>
                     <ui:NavigationItem.Icon>earth24</ui:NavigationItem.Icon>
                     <ui:NavigationItem.Content>Discover</ui:NavigationItem.Content>
@@ -143,10 +147,121 @@
             </ui:NavigationCompact.Footer>
         </ui:NavigationCompact>
 
-        <Frame
-            x:Name="RootFrame"
-            Grid.Row="1"
-            Grid.Column="1"/>
+        <Grid>
+            <Grid.Column>1</Grid.Column>
+            <Grid.Row>2</Grid.Row>
+            <Grid.Margin>5</Grid.Margin>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.5*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="1.5*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="1.1*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="1.5*"/>
+                <ColumnDefinition Width="0.7*"/>
+                <ColumnDefinition Width="1.6*"/>
+                <ColumnDefinition Width="0.7*"/>
+                <ColumnDefinition Width="0.5*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>
+
+            <Border Background="DimGray">
+                <Border.Margin>5</Border.Margin>
+                <Grid.ColumnSpan>16</Grid.ColumnSpan>
+                <Grid.RowSpan>2</Grid.RowSpan>
+                <Border.CornerRadius>15</Border.CornerRadius>
+            </Border>
+            <Viewbox Margin="10,25,10,5">
+                <Grid.Column>1</Grid.Column>
+                <ui:Button BorderThickness="0" Background="Gray" Padding="0,0,0,0">
+                    <ui:Button.Width>10</ui:Button.Width>
+                    <ui:Button.Height>10</ui:Button.Height>
+                    <ui:SymbolIcon Symbol="Heart24" FontSize="6"/>
+                </ui:Button>
+            </Viewbox>
+
+            <Viewbox Margin="10,25,10,5">
+                <Grid.Column>2</Grid.Column>
+                <ui:Button BorderThickness="0" Background="Gray" Padding="0,0,0,0">
+                    <ui:Button.Width>10</ui:Button.Width>
+                    <ui:Button.Height>10</ui:Button.Height>
+                    <ui:SymbolIcon Symbol="Heart24" FontSize="6"/>
+                </ui:Button>
+            </Viewbox>
+
+            <Viewbox Margin="10,25,10,5">
+                <Grid.Column>3</Grid.Column>
+                <ui:Button BorderThickness="0" Background="Gray" Padding="0,0,0,0">
+                    <ui:Button.Width>10</ui:Button.Width>
+                    <ui:Button.Height>10</ui:Button.Height>
+                    <ui:SymbolIcon Symbol="Heart24" FontSize="6"/>
+                </ui:Button>
+            </Viewbox>
+
+            <Viewbox Margin="10,25,10,5">
+                <Grid.Column>5</Grid.Column>
+                <ui:Button BorderThickness="0" Background="Gray" Padding="0,0,0,0">
+                    <ui:Button.Width>10</ui:Button.Width>
+                    <ui:Button.Height>10</ui:Button.Height>
+                    <ui:SymbolIcon Symbol="Heart24" FontSize="6"/>
+                </ui:Button>
+            </Viewbox>
+
+            <Viewbox Margin="10,25,10,5">
+                <Grid.Column>6</Grid.Column>
+                <ui:Button BorderThickness="0" Background="Gray" Padding="0,0,0,0">
+                    <ui:Button.Width>10</ui:Button.Width>
+                    <ui:Button.Height>10</ui:Button.Height>
+                    <ui:SymbolIcon Symbol="Heart24" FontSize="6"/>
+                </ui:Button>
+            </Viewbox>
+
+            <Viewbox Margin="10,25,10,5">
+                <Grid.Column>7</Grid.Column>
+                <ui:Button BorderThickness="0" Background="Gray" Padding="0,0,0,0">
+                    <ui:Button.Width>10</ui:Button.Width>
+                    <ui:Button.Height>10</ui:Button.Height>
+                    <ui:SymbolIcon Symbol="Heart24" FontSize="6"/>
+                </ui:Button>
+            </Viewbox>
+
+            <Viewbox Margin="10,25,10,5">
+                <Grid.Column>8</Grid.Column>
+                <ui:Button BorderThickness="0" Background="Gray" Padding="0,0,0,0">
+                    <ui:Button.Width>10</ui:Button.Width>
+                    <ui:Button.Height>10</ui:Button.Height>
+                    <ui:SymbolIcon Symbol="Heart24" FontSize="6"/>
+                </ui:Button>
+            </Viewbox>
+
+            <Viewbox Margin="10,25,10,5">
+                <Grid.Column>9</Grid.Column>
+                <ui:Button BorderThickness="0" Background="Gray" Padding="0,0,0,0">
+                    <ui:Button.Width>10</ui:Button.Width>
+                    <ui:Button.Height>10</ui:Button.Height>
+                    <ui:SymbolIcon Symbol="Heart24" FontSize="6"/>
+                </ui:Button>
+            </Viewbox>
+
+            <Viewbox Margin="10,25,10,5">
+                <Grid.Column>13</Grid.Column>
+                <ui:Button BorderThickness="0" Background="Gray" Padding="0,0,0,0">
+                    <ui:Button.Width>10</ui:Button.Width>
+                    <ui:Button.Height>10</ui:Button.Height>
+                    <ui:SymbolIcon Symbol="Heart24" FontSize="6"/>
+                </ui:Button>
+            </Viewbox>
+
+        </Grid>
+
     </Grid>
 </ui:UiWindow>
 
