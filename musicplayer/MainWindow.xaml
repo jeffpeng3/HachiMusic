@@ -108,6 +108,9 @@
             </ui:Button>
         </Grid>
 
+        <Border Background="DimGray">
+            <Grid.RowSpan>3</Grid.RowSpan>
+        </Border>
         <Frame
             x:Name="RootFrame"
             Grid.Row="1"
@@ -194,7 +197,7 @@
                 <ui:Button BorderThickness="0" Background="Gray" Padding="0,0,0,0">
                     <ui:Button.Width>10</ui:Button.Width>
                     <ui:Button.Height>10</ui:Button.Height>
-                    <ui:SymbolIcon Symbol="Heart24" FontSize="6"/>
+                    <ui:SymbolIcon Symbol="MusicNote2Play20" FontSize="6"/>
                 </ui:Button>
             </Viewbox>
 
@@ -203,16 +206,17 @@
                 <ui:Button BorderThickness="0" Background="Gray" Padding="0,0,0,0">
                     <ui:Button.Width>10</ui:Button.Width>
                     <ui:Button.Height>10</ui:Button.Height>
-                    <ui:SymbolIcon Symbol="Heart24" FontSize="6"/>
+                    <ui:SymbolIcon Symbol="ArrowMaximize24" FontSize="6"/>
                 </ui:Button>
             </Viewbox>
+            
 
             <Viewbox Margin="10,25,10,5">
                 <Grid.Column>5</Grid.Column>
                 <ui:Button BorderThickness="0" Background="Gray" Padding="0,0,0,0">
                     <ui:Button.Width>10</ui:Button.Width>
                     <ui:Button.Height>10</ui:Button.Height>
-                    <ui:SymbolIcon Symbol="Heart24" FontSize="6"/>
+                    <ui:SymbolIcon Symbol="ArrowRepeatAll24" FontSize="6"/>
                 </ui:Button>
             </Viewbox>
 
@@ -221,7 +225,7 @@
                 <ui:Button BorderThickness="0" Background="Gray" Padding="0,0,0,0">
                     <ui:Button.Width>10</ui:Button.Width>
                     <ui:Button.Height>10</ui:Button.Height>
-                    <ui:SymbolIcon Symbol="Heart24" FontSize="6"/>
+                    <ui:SymbolIcon Symbol="Previous24" FontSize="6"/>
                 </ui:Button>
             </Viewbox>
 
@@ -230,7 +234,7 @@
                 <ui:Button BorderThickness="0" Background="Gray" Padding="0,0,0,0">
                     <ui:Button.Width>10</ui:Button.Width>
                     <ui:Button.Height>10</ui:Button.Height>
-                    <ui:SymbolIcon Symbol="Heart24" FontSize="6"/>
+                    <ui:SymbolIcon Symbol="Play24" FontSize="6"/>
                 </ui:Button>
             </Viewbox>
 
@@ -239,7 +243,7 @@
                 <ui:Button BorderThickness="0" Background="Gray" Padding="0,0,0,0">
                     <ui:Button.Width>10</ui:Button.Width>
                     <ui:Button.Height>10</ui:Button.Height>
-                    <ui:SymbolIcon Symbol="Heart24" FontSize="6"/>
+                    <ui:SymbolIcon Symbol="Next24" FontSize="6"/>
                 </ui:Button>
             </Viewbox>
 
@@ -248,7 +252,7 @@
                 <ui:Button BorderThickness="0" Background="Gray" Padding="0,0,0,0">
                     <ui:Button.Width>10</ui:Button.Width>
                     <ui:Button.Height>10</ui:Button.Height>
-                    <ui:SymbolIcon Symbol="Heart24" FontSize="6"/>
+                    <ui:SymbolIcon Symbol="ArrowWrap20" FontSize="6"/>
                 </ui:Button>
             </Viewbox>
 
@@ -257,7 +261,7 @@
                 <ui:Button BorderThickness="0" Background="Gray" Padding="0,0,0,0">
                     <ui:Button.Width>10</ui:Button.Width>
                     <ui:Button.Height>10</ui:Button.Height>
-                    <ui:SymbolIcon Symbol="Heart24" FontSize="6"/>
+                    <ui:SymbolIcon Symbol="Speaker224" FontSize="6"/>
                 </ui:Button>
             </Viewbox>
 
