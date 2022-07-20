@@ -11,8 +11,34 @@
     Title="MainPage">
 
     <Grid>
-        <ui:Button>
-            fuck this
-        </ui:Button>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="5"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="5"/>
+        </Grid.RowDefinitions>
+        <Image x:Name="PicViewer">
+            <Grid.Column>1</Grid.Column>
+            <Grid.Row>1</Grid.Row>
+        </Image>
+        <ScrollViewer>
+            <Grid.Column>1</Grid.Column>
+            <Grid.Row>2</Grid.Row>
+            <Viewbox>
+                <Viewbox.VerticalAlignment>Top</Viewbox.VerticalAlignment>
+                <StackPanel x:Name="QueueList">
+                    <StackPanel.Children>
+                        <Grid>
+                            <Border Background="#FFFFFF" Height="100" Width="600"/>
+                        </Grid>
+                    </StackPanel.Children>
+                </StackPanel>
+            </Viewbox>
+        </ScrollViewer>
     </Grid>
 </ui:UiPage>
