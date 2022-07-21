@@ -45,7 +45,7 @@ namespace musicplayer
         private async void WindowMove(object sender, MouseButtonEventArgs e)
         {
             var pos = Mouse.GetPosition(this);
-            if (pos.Y > 50)
+            if (pos.Y > 75)
             {
                 return;
             }
