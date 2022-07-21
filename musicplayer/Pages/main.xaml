@@ -28,11 +28,7 @@
             <Grid.Row>1</Grid.Row>
             <StackPanel x:Name="QueueList">
                 <StackPanel.Children>
-                    <Grid Height="70">
-                        <Border Background="Gray"/>
-
-                    </Grid>
-                    <my:MusicView artist="dick">
+                    <my:MusicView Height="20" artist="dick">
 
                     </my:MusicView>
                 </StackPanel.Children>
