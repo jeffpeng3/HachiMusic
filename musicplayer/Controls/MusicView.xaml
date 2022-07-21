@@ -1,0 +1,39 @@
+﻿<UserControl x:Class="musicplayer.Controls.MusicView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:musicplayer.Controls"
+             mc:Ignorable="d" 
+             x:Name="MyMusicView"
+             d:DesignHeight="70" d:DesignWidth="350">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Image>
+            <Grid.RowSpan>2</Grid.RowSpan>
+            <Image.Source>../image/Play.png</Image.Source>
+        </Image>
+        <Label>
+            <Grid.Column>1</Grid.Column>
+            <Grid.Row>0</Grid.Row>
+            title
+        </Label>
+        <Label Content="{Binding Path=artist, ElementName=MyMusicView}">
+            <Grid.Column>1</Grid.Column>
+            <Grid.Row>1</Grid.Row>
+        </Label>
+        <Label Content="{Binding Path=dutation, ElementName=MyMusicView}">
+            <Grid.Column>2</Grid.Column>
+            <Grid.RowSpan>2</Grid.RowSpan>
+
+        </Label>
+    </Grid>
+</UserControl>

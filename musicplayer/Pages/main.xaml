@@ -6,6 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
     xmlns:local="clr-namespace:musicplayer.Pages"
+    xmlns:my="clr-namespace:musicplayer.Controls"
     mc:Ignorable="d" 
     d:DesignHeight="390" d:DesignWidth="360"
     Title="MainPage">
@@ -29,8 +30,11 @@
                 <StackPanel.Children>
                     <Grid Height="70">
                         <Border Background="Gray"/>
-                        
+
                     </Grid>
+                    <my:MusicView artist="dick">
+
+                    </my:MusicView>
                 </StackPanel.Children>
             </StackPanel>
         </ScrollViewer>
