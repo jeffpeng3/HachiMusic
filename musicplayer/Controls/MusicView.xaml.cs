@@ -20,11 +20,13 @@ namespace musicplayer.Controls
     /// </summary>
     public partial class MusicView : UserControl
     {
-
         public static readonly DependencyProperty dutationProperty = DependencyProperty.Register("dutation", typeof(TimeSpan), typeof(MusicView), new FrameworkPropertyMetadata(TimeSpan.Zero));
 
         public static readonly DependencyProperty artistProperty = DependencyProperty.Register("artist", typeof(string), typeof(MusicView), new FrameworkPropertyMetadata(string.Empty));
 
+        public static readonly DependencyProperty titleProperty = DependencyProperty.Register("title", typeof(string), typeof(MusicView), new FrameworkPropertyMetadata(string.Empty));
+
+        public static readonly DependencyProperty srcProperty = DependencyProperty.Register("src", typeof(Uri), typeof(MusicView), new FrameworkPropertyMetadata(new Uri("about:blank")));
         public TimeSpan dutation
         {
             get { return (TimeSpan)GetValue(dutationProperty); }
@@ -35,6 +37,17 @@ namespace musicplayer.Controls
         {
             get { return (string)GetValue(artistProperty); }
             set { SetValue(artistProperty, value); }
+        }
+
+        public string title
+        {
+            get { return (string)GetValue(titleProperty); }
+            set { SetValue(titleProperty, value); }
+        }
+        public Uri src
+        {
+            get { return (Uri)GetValue(srcProperty); }
+            set { SetValue(srcProperty, value); }
         }
         public MusicView()
         {

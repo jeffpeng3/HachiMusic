@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Wpf.Ui.Controls;
+using musicplayer.Controls;
 
 namespace musicplayer.Pages
 {
@@ -24,6 +25,19 @@ namespace musicplayer.Pages
         public MainPage()
         {
             InitializeComponent();
+            for (int i = 0; i < 100; i++)
+            {
+                MusicView musicView = new()
+                {
+                    title = "『フタリボシ』 Ninomae Ina'nis & Tsukumo Sana (Cover)",
+                    artist = "Ninomae Ina'nis Ch. hololive-EN",
+                    dutation = new TimeSpan(0, 5, 5),
+                    src = new Uri(@"https://img.youtube.com/vi/84uvWfZqqeg/maxresdefault.jpg"),
+                    Height = 55,
+                    Margin = new Thickness(0, 5, 0, 0)
+                };
+                QueueList.Items.Add(musicView);
+            }
         }
     }
 }

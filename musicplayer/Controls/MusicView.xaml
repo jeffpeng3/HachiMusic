@@ -6,34 +6,39 @@
              xmlns:local="clr-namespace:musicplayer.Controls"
              mc:Ignorable="d" 
              x:Name="MyMusicView"
-             d:DesignHeight="70" d:DesignWidth="350">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="3*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Image>
-            <Grid.RowSpan>2</Grid.RowSpan>
-            <Image.Source>../image/Play.png</Image.Source>
-        </Image>
-        <Label>
-            <Grid.Column>1</Grid.Column>
-            <Grid.Row>0</Grid.Row>
-            title
-        </Label>
-        <Label Content="{Binding Path=artist, ElementName=MyMusicView}">
-            <Grid.Column>1</Grid.Column>
-            <Grid.Row>1</Grid.Row>
-        </Label>
-        <Label Content="{Binding Path=dutation, ElementName=MyMusicView}">
-            <Grid.Column>2</Grid.Column>
-            <Grid.RowSpan>2</Grid.RowSpan>
-
-        </Label>
-    </Grid>
+             d:DesignHeight="55" d:DesignWidth="350">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="85"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Image x:Name="image" Source="{Binding Path=src, ElementName=MyMusicView}">
+                <Grid.RowSpan>2</Grid.RowSpan>
+                <Image.Margin>7,3,0,3</Image.Margin>
+            </Image>
+            <Label Content="{Binding Path=title, ElementName=MyMusicView}">
+                <Grid.Column>1</Grid.Column>
+                <Grid.Row>0</Grid.Row>
+                <Label.FontSize>18</Label.FontSize>
+                <Label.Margin>5,5,0,0</Label.Margin>
+            </Label>
+            <Label Content="{Binding Path=artist, ElementName=MyMusicView}">
+                <Grid.Column>1</Grid.Column>
+                <Grid.Row>1</Grid.Row>
+                <Label.FontSize>14</Label.FontSize>
+                <Label.Margin>5,5,0,0</Label.Margin>
+            </Label>
+            <Label Content="{Binding Path=dutation, ElementName=MyMusicView}">
+                <Grid.Column>2</Grid.Column>
+                <Grid.RowSpan>2</Grid.RowSpan>
+                <Label.Margin>0,0,8,0</Label.Margin>
+                <Label.FontSize>14</Label.FontSize>
+                <Label.VerticalAlignment>Center</Label.VerticalAlignment>
+                <Label.HorizontalAlignment>Right</Label.HorizontalAlignment>
+            </Label>
+        </Grid>
 </UserControl>
