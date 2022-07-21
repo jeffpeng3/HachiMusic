@@ -4,6 +4,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:xf="clr-namespace:XamlFlair;assembly=XamlFlair.WPF"
              xmlns:local="clr-namespace:musicplayer.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="100" d:DesignWidth="800">
@@ -20,7 +21,7 @@
             </ui:SymbolIcon>
         </ui:Button>
 
-        <Slider x:Name="slider">
+        <Slider x:Name="slider" xf:Animations.Primary="{StaticResource FadeIn}">
             <Slider.Visibility>Hidden</Slider.Visibility>
             <Slider.Opacity>0</Slider.Opacity>
             <Slider.Margin>15</Slider.Margin>

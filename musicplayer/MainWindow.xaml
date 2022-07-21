@@ -145,7 +145,7 @@
                 <ui:NavigationItem PageType="{x:Type pages:MainPage}">
                     <ui:NavigationItem.Cache>true</ui:NavigationItem.Cache>
                     <ui:NavigationItem.Icon>PersonCircle24</ui:NavigationItem.Icon>
-                    <ui:NavigationItem.Content>User</ui:NavigationItem.Content>
+                    <ui:NavigationItem.Content>User(WIP)</ui:NavigationItem.Content>
                     <ui:NavigationItem.PageTag>User</ui:NavigationItem.PageTag>
                 </ui:NavigationItem>
             </ui:NavigationCompact.Footer>
@@ -209,7 +209,7 @@
                     <ui:SymbolIcon Symbol="ArrowMaximize24" FontSize="6"/>
                 </ui:Button>
             </Viewbox>
-            
+
 
             <Viewbox Margin="10,25,10,5">
                 <Grid.Column>5</Grid.Column>
