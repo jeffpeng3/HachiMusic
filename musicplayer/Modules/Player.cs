@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.Threading;
+using musicplayer.Enums;
 using Nito.Collections;
 using System;
 using System.Collections.Concurrent;
@@ -23,7 +24,7 @@ namespace musicplayer.Modules
         readonly ObservableCollection<Music> queue = new();
         public int index;
         public bool Mute;
-        public LoopMode loop;
+        public LoopModeEnum LoopMode;
         public double volume;
         public Music? nowPlaying;
         public PlayStatus status;
@@ -32,12 +33,12 @@ namespace musicplayer.Modules
 
         public Player(AsyncQueue<MessageTopic> _MessageQueue)
         {
-            muted = false;
+            Mute = false;
             status = PlayStatus.NotPlaying;
             MessageQueue = _MessageQueue;
             player.MediaEnded += AfterPlay;
             index = 1;
-            loop = LoopMode.LoopNone;
+            LoopMode = LoopModeEnum.LoopNone;
             nowPlaying = null;
             volume = 0.25;
             _ = TickAsync();
@@ -59,15 +60,15 @@ namespace musicplayer.Modules
 
         private void AfterPlay(object? sender, EventArgs e)
         {
-            switch (loop)
+            switch (LoopMode)
             {
-                case LoopMode.LoopNone:
+                case LoopModeEnum.LoopNone:
                     if (nowPlaying != null)
                     {
                         index++;
                     }
                     break;
-                case LoopMode.LoopAll:
+                case LoopModeEnum.LoopAll:
                     if (nowPlaying != null)
                     {
                         index = index == queue.Count ? 1 : index + 1;
@@ -88,7 +89,7 @@ namespace musicplayer.Modules
                 if (index <= queue.Count)
                 {
                     var song = queue[index - 1];
-                    player.Open(song.Url);
+                    player.Open(song.AudioStream);
                     player.Play();
                     nowPlaying = song;
                     status = PlayStatus.Play;
@@ -110,8 +111,8 @@ namespace musicplayer.Modules
 
         public void Volume(double? target, bool mute = false)
         {
-            muted = mute;
-            if (muted)
+            Mute = mute;
+            if (Mute)
             {
                 target = 0;
             }
@@ -127,18 +128,18 @@ namespace musicplayer.Modules
 
         public string ChangeLoopMode()
         {
-            loop = loop switch
+            LoopMode = LoopMode switch
             {
-                LoopMode.LoopNone => LoopMode.LoopSingle,
-                LoopMode.LoopSingle => LoopMode.LoopAll,
-                LoopMode.LoopAll => LoopMode.LoopNone,
-                _ => LoopMode.LoopNone,
+                LoopModeEnum.LoopNone => LoopModeEnum.LoopSingle,
+                LoopModeEnum.LoopSingle => LoopModeEnum.LoopAll,
+                LoopModeEnum.LoopAll => LoopModeEnum.LoopNone,
+                _ => LoopModeEnum.LoopNone,
             };
-            return loop switch
+            return LoopMode switch
             {
-                LoopMode.LoopNone => "LoopNone",
-                LoopMode.LoopSingle => "LoopSingle",
-                LoopMode.LoopAll => "LoopAll",
+                LoopModeEnum.LoopNone => "LoopNone",
+                LoopModeEnum.LoopSingle => "LoopSingle",
+                LoopModeEnum.LoopAll => "LoopAll",
                 _ => "ERROR",
             };
         }

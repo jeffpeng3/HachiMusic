@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace musicplayer.Enums
 {
-    public enum LoopMode
+    public enum LoopModeEnum
     {
         LoopNone,
         LoopSingle,

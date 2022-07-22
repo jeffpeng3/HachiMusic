@@ -21,10 +21,11 @@ namespace musicplayer.Modules
 
         public Music(Uri _url, string _title, string _artist, Uri _Thumbnails, TimeSpan _duration)
         {
-            Url = _url;
+            VideoId = "";
+            AudioStream = _url;
             Title = _title;
             Artist = _artist;
-            Thumbnails = _Thumbnails;
+            Thumbnail = _Thumbnails;
             Duration = _duration;
         }
 
