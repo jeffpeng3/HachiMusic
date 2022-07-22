@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using YoutubeExplode;
@@ -9,7 +7,7 @@ using YoutubeExplode.Videos.Streams;
 
 namespace musicplayer.Modules
 {
-    public class Music
+    public class Song
     {
         static readonly YoutubeClient youtube = new();
         public Uri AudioStream { get; }
@@ -19,17 +17,25 @@ namespace musicplayer.Modules
         public TimeSpan Duration { get; }
         public string VideoId { get; }
 
-        public Music(Uri _url, string _title, string _artist, Uri _Thumbnails, TimeSpan _duration)
+        public Song()
         {
-            VideoId = "";
+            AudioStream = new Uri("about:blank");
+            Title = string.Empty;
+            Artist = string.Empty;
+            Thumbnail = new Uri("about:blank");
+            Duration = TimeSpan.Zero;
+            VideoId = string.Empty;
+        }
+        public Song(Uri _url, string _title, string _artist, Uri _Thumbnails, TimeSpan _duration, string _videoId)
+        {
             AudioStream = _url;
             Title = _title;
             Artist = _artist;
             Thumbnail = _Thumbnails;
             Duration = _duration;
+            VideoId = _videoId;
         }
-
-        public async static Task<Music> CreateMusicAsync(string url)
+        public async static Task<Song> CreateSongAsync(string url)
         {
             Uri? targetUrl;
             string reg = @"^((http[s]?):\/)?\/?([^:\/\s]+)((\/\w+)*\/)([\w\-\.]+[^#?\s]+)(.*)?(#[\w\-]+)?$";
@@ -37,17 +43,19 @@ namespace musicplayer.Modules
             Match m = r.Match(url);
             if (!m.Success)
             {
-
+                throw new Exception("can't recognized url");
             }
             targetUrl = new Uri(url);
             var MusicMetadata = await youtube.Videos.GetAsync(url);
             var MusicManifest = await youtube.Videos.Streams.GetManifestAsync(url);
-            var StreamUrl = new Uri(MusicManifest.GetAudioOnlyStreams().GetWithHighestBitrate().Url);
+
+            var streamUrl = new Uri(MusicManifest.GetAudioOnlyStreams().GetWithHighestBitrate().Url);
             var title = MusicMetadata.Title;
             var artist = MusicMetadata.Author.ChannelTitle;
-            var Thumbnails = new Uri(MusicMetadata.Thumbnails.OrderBy(x => x.Resolution.Area).Last().Url);
+            var thumbnails = new Uri(MusicMetadata.Thumbnails.OrderBy(x => x.Resolution.Area).Last().Url);
             var duration = MusicMetadata.Duration ?? TimeSpan.Zero;
-            return new Music(StreamUrl, title, artist, Thumbnails, duration);
+            var videoID = MusicMetadata.Id;
+            return new Song(streamUrl, title, artist, thumbnails, duration, videoID);
         }
     }
 }
