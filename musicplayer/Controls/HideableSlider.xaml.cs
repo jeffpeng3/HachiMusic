@@ -26,10 +26,17 @@ namespace musicplayer.Controls
         public event PropertyChangedEventHandler? PropertyChanged = delegate { };
 
         public static readonly DependencyProperty ValueProperty = DependencyProperty.Register("Value", typeof(double), typeof(MusicView), new FrameworkPropertyMetadata(0.5));
+
+        public static readonly DependencyProperty MuteProperty = DependencyProperty.Register("Mute", typeof(bool), typeof(MusicView), new FrameworkPropertyMetadata(false));
         public double Value
         {
             get { return (double)GetValue(ValueProperty); }
-            set { value = Math.Max(0, Math.Min(1, value)); SetValue(ValueProperty, value); ChangeIcon(value); OnPropertyChanged("Value"); }
+            set { Mute = false; value = Math.Max(0, Math.Min(1, value)); SetValue(ValueProperty, value); ChangeIcon(value); OnPropertyChanged("Value"); }
+        }
+        public bool Mute
+        {
+            get { return (bool)GetValue(MuteProperty); }
+            set { SetValue(MuteProperty, value); OnPropertyChanged("Mute"); }
         }
         public HideableSlider()
         {
@@ -38,6 +45,18 @@ namespace musicplayer.Controls
             {
                 Value += slider.SmallChange * e.Delta / 120;
             };
+        }
+        private void MuteToggle(object sender, RoutedEventArgs e)
+        {
+            Mute = !Mute;
+            if (Mute)
+            {
+                button.Content = FindResource("Mute");
+            }
+            else
+            {
+                ChangeIcon(Value);
+            }
         }
         private void ChangeIcon(double value)
         {

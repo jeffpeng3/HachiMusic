@@ -56,7 +56,7 @@
         </Grid.ColumnDefinitions>
         <Viewbox>
             <Grid.Column>2</Grid.Column>
-            <ui:Button x:Name="button" BorderThickness="0" Background="Gray" Padding="0,0,0,0">
+            <ui:Button x:Name="button" Click="MuteToggle" BorderThickness="0" Background="Gray" Padding="0,0,0,0">
                 <DynamicResource ResourceKey="Medium"/>
             </ui:Button>
         </Viewbox>

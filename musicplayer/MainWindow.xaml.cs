@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.Threading;
+using musicplayer.Controls;
 using musicplayer.Modules;
 using System;
 using System.Collections.Concurrent;
@@ -37,6 +38,7 @@ namespace musicplayer
         {
             IsPadOpen = true;
             InitializeComponent();
+            HideableSlider a = new();
         }
         private void PadOpenOrClose(object sender, RoutedEventArgs e)
         {
@@ -89,10 +91,11 @@ namespace musicplayer
         {
             WindowState = WindowState.Minimized;
         }
-
         protected void OnPropertyChanged(string propName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
         }
+
+
     }
 }
