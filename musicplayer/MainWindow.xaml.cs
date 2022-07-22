@@ -51,7 +51,6 @@ namespace musicplayer
             }
             if (WindowState == WindowState.Maximized)
             {
-
                 while (pos == e.GetPosition(this))
                 {
                     await Task.Delay(100);
