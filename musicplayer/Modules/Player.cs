@@ -14,56 +14,15 @@ using YoutubeExplode.Videos.Streams;
 
 namespace musicplayer.Modules
 {
-    public enum LoopMode
-    {
-        LoopNone,
-        LoopSingle,
-        LoopAll
-    }
 
-    public enum PlayStatus
-    {
-        NotPlaying,
-        Play,
-        Pause
-    }
 
-    public class Music
-    {
-        static readonly YoutubeClient youtube = new();
-        public Uri Url { get; }
-        public string Title { get; }
-        public string Artist { get; }
-        public Uri Thumbnails { get; }
-        public TimeSpan Duration { get; }
 
-        public Music(Uri _url, string _title, string _artist, Uri _Thumbnails, TimeSpan _duration)
-        {
-            Url = _url;
-            Title = _title;
-            Artist = _artist;
-            Thumbnails = _Thumbnails;
-            Duration = _duration;
-        }
-
-        public async static Task<Music> CreateMusicAsync(string url)
-        {
-            var MusicMetadata = await youtube.Videos.GetAsync(url);
-            var MusicManifest = await youtube.Videos.Streams.GetManifestAsync(url);
-            var StreamUrl = new Uri(MusicManifest.GetAudioOnlyStreams().GetWithHighestBitrate().Url);
-            var title = MusicMetadata.Title;
-            var artist = MusicMetadata.Author.ChannelTitle;
-            var Thumbnails = new Uri(MusicMetadata.Thumbnails.OrderBy(x => x.Resolution.Area).Last().Url);
-            var duration = MusicMetadata.Duration ?? TimeSpan.Zero;
-            return new Music(StreamUrl, title, artist, Thumbnails, duration);
-        }
-    }
     public class Player
     {
         readonly MediaPlayer player = new();
         readonly ObservableCollection<Music> queue = new();
         public int index;
-        public bool muted;
+        public bool Mute;
         public LoopMode loop;
         public double volume;
         public Music? nowPlaying;
