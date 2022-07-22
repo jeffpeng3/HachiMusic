@@ -18,9 +18,6 @@ namespace musicplayer.Modules
     public class teeeeeest
     {
         WaveOut qwer = new();
-        void f()
-        {
-            qwer.GetPosition
-        }
+
     }
 }
