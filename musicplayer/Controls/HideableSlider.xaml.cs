@@ -31,7 +31,7 @@ namespace musicplayer.Controls
         public double Value
         {
             get { return (double)GetValue(ValueProperty); }
-            set { Mute = false; value = Math.Max(0, Math.Min(1, value)); SetValue(ValueProperty, value); ChangeIcon(value); OnPropertyChanged("Value"); }
+            set { if (Mute) Mute = false; value = Math.Max(0, Math.Min(1, value)); SetValue(ValueProperty, value); ChangeIcon(value); OnPropertyChanged("Value"); }
         }
         public bool Mute
         {

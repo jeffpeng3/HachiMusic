@@ -256,7 +256,7 @@
                     <ui:SymbolIcon Symbol="ArrowWrap20" FontSize="6"/>
                 </ui:Button>
             </Viewbox>
-            <my:HideableSlider Margin="10,25,10,5">
+            <my:HideableSlider Margin="10,25,10,5" PropertyChanged="OnAnyControlPropertyChanged">
                 <Grid.Column>11</Grid.Column>
                 <Grid.ColumnSpan>3</Grid.ColumnSpan>
                 <my:HideableSlider.HorizontalAlignment>Right</my:HideableSlider.HorizontalAlignment>

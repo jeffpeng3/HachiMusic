@@ -38,7 +38,6 @@ namespace musicplayer
         {
             IsPadOpen = true;
             InitializeComponent();
-            HideableSlider a = new();
         }
         private void PadOpenOrClose(object sender, RoutedEventArgs e)
         {
@@ -96,6 +95,10 @@ namespace musicplayer
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
         }
 
+        private void OnAnyControlPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            Console.WriteLine(e.PropertyName);
+        }
 
     }
 }
