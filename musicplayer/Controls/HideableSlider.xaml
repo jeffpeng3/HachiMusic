@@ -11,22 +11,27 @@
              d:DesignHeight="20" d:DesignWidth="120">
     <UserControl.Resources>
         <Style x:Key="PropertyTriggerExampleButtonStyle" TargetType="{x:Type Slider}" BasedOn="{StaticResource {x:Type Slider}}">
-            <Setter Property="Opacity" Value="0" />
+            <Setter Property="RenderTransform">
+                <Setter.Value>
+                    <ScaleTransform ScaleX="1" CenterX="100"/>
+                </Setter.Value>
+            </Setter>
             <Style.Triggers>
-                <DataTrigger Binding="{Binding Path=IsMouseOver, ElementName=button}" Value="True">
+                <DataTrigger Binding="{Binding Path=IsMouseOver, ElementName=ThisControl}" Value="True">
                     <DataTrigger.EnterActions>
                         <BeginStoryboard>
                             <Storyboard>
-                                <DoubleAnimation Storyboard.TargetProperty="Opacity" To="1" Duration="0:0:0.5" />
+                                <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX"
+                                                     Duration="0:00:00.1"/>
                             </Storyboard>
                         </BeginStoryboard>
                     </DataTrigger.EnterActions>
-                </DataTrigger>
-                <DataTrigger Binding="{Binding Path=IsMouseOver, ElementName=slider}" Value="True">
                     <DataTrigger.ExitActions>
                         <BeginStoryboard>
                             <Storyboard>
-                                <DoubleAnimation Storyboard.TargetProperty="Opacity" To="0" Duration="0:0:0.5" />
+                                <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX"
+                                                     To="0"
+                                                     Duration="0:00:00.15"/>
                             </Storyboard>
                         </BeginStoryboard>
                     </DataTrigger.ExitActions>
@@ -39,9 +44,10 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
         <Viewbox>
-            <Grid.Column>1</Grid.Column>
+            <Grid.Column>2</Grid.Column>
             <ui:Button x:Name="button" MouseEnter="StartShow" BorderThickness="0" Background="Gray" Padding="0,0,0,0">
                 <ui:SymbolIcon>
                     <ui:SymbolIcon.FontSize>10</ui:SymbolIcon.FontSize>
@@ -51,11 +57,13 @@
         </Viewbox>
 
         <Slider x:Name="slider" Style="{DynamicResource PropertyTriggerExampleButtonStyle}">
+            <Grid.Column>1</Grid.Column>
             <Slider.SmallChange>0.01</Slider.SmallChange>
             <Slider.LargeChange>0.05</Slider.LargeChange>
             <Slider.Maximum>1</Slider.Maximum>
             <Slider.Value>0.5</Slider.Value>
-            <Slider.Margin>0,0,10,0</Slider.Margin>
+            <Slider.Margin>0,0,0,0</Slider.Margin>
+            <Slider.Width>auto</Slider.Width>
             <Slider.VerticalAlignment>center</Slider.VerticalAlignment>
         </Slider>
     </Grid>
