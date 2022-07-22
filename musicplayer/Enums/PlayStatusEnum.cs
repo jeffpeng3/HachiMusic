@@ -3,21 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using NAudio;
-using NAudio.Wave;
 
-namespace musicplayer.Modules
+namespace musicplayer.Enums
 {
-    public enum PlayStatus
+    public enum PlayStatusEmun
     {
         NotPlaying,
         Play,
         Pause
-    }
-
-    public class teeeeeest
-    {
-        WaveOut qwer = new();
-
     }
 }
