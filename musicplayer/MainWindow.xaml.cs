@@ -97,7 +97,7 @@ namespace musicplayer
 
         private void OnAnyControlPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            Console.WriteLine(e.PropertyName);
+            //Console.WriteLine(e.PropertyName);
         }
 
     }

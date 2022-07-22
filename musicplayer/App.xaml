@@ -7,6 +7,8 @@
                 xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml">
     <Application.Resources>
         <ResourceDictionary>
+            <FontFamily x:Key="SegoeFluentIcons">pack://application:,,,/;component/Resources/#Segoe Fluent Icons</FontFamily>
+
             <ResourceDictionary.MergedDictionaries>
                 <ui:ControlsDictionary/>
                 <ui:ThemesDictionary Theme="Dark" />

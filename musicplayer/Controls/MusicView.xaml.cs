@@ -26,25 +26,25 @@ namespace musicplayer.Controls
 
         public static readonly DependencyProperty titleProperty = DependencyProperty.Register("title", typeof(string), typeof(MusicView), new FrameworkPropertyMetadata(string.Empty));
 
-        public static readonly DependencyProperty srcProperty = DependencyProperty.Register("src", typeof(Uri), typeof(MusicView), new FrameworkPropertyMetadata(new Uri("about:blank")));
-        public TimeSpan dutation
+        public static readonly DependencyProperty srcProperty = DependencyProperty.Register("src", typeof(Uri), typeof(MusicView), new FrameworkPropertyMetadata(new Uri("https://img.youtube.com/vi/%3Cinsert-youtube-video-id-here%3E/maxresdefault.jpg")));
+        public TimeSpan Dutation
         {
             get { return (TimeSpan)GetValue(dutationProperty); }
             set { SetValue(dutationProperty, value); }
         }
 
-        public string artist
+        public string Artist
         {
             get { return (string)GetValue(artistProperty); }
             set { SetValue(artistProperty, value); }
         }
 
-        public string title
+        public string Title
         {
             get { return (string)GetValue(titleProperty); }
             set { SetValue(titleProperty, value); }
         }
-        public Uri src
+        public Uri Src
         {
             get { return (Uri)GetValue(srcProperty); }
             set { SetValue(srcProperty, value); }
