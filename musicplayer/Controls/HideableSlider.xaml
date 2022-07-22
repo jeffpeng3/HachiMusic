@@ -13,7 +13,7 @@
         <Style x:Key="PropertyTriggerExampleButtonStyle" TargetType="{x:Type Slider}" BasedOn="{StaticResource {x:Type Slider}}">
             <Setter Property="RenderTransform">
                 <Setter.Value>
-                    <ScaleTransform ScaleX="1" CenterX="100"/>
+                    <ScaleTransform ScaleX="0" CenterX="100"/>
                 </Setter.Value>
             </Setter>
             <Style.Triggers>
@@ -22,7 +22,9 @@
                         <BeginStoryboard>
                             <Storyboard>
                                 <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX"
-                                                     Duration="0:00:00.1"/>
+                                                 From="0"
+                                                To="1"
+                                                Duration="0:00:00.1"/>
                             </Storyboard>
                         </BeginStoryboard>
                     </DataTrigger.EnterActions>
@@ -31,13 +33,19 @@
                             <Storyboard>
                                 <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX"
                                                      To="0"
-                                                     Duration="0:00:00.15"/>
+                                                     Duration="0:00:00.05"/>
                             </Storyboard>
                         </BeginStoryboard>
                     </DataTrigger.ExitActions>
                 </DataTrigger>
             </Style.Triggers>
         </Style>
+
+
+        <ui:SymbolIcon x:Key="Mute" Symbol="SpeakerMute16"/>
+        <ui:SymbolIcon x:Key="Low" Symbol="Speaker016"/>
+        <ui:SymbolIcon x:Key="Medium" Symbol="Speaker116"/>
+        <ui:SymbolIcon x:Key="High" Symbol="Speaker216"/>
     </UserControl.Resources>
 
     <Grid>
@@ -48,11 +56,8 @@
         </Grid.ColumnDefinitions>
         <Viewbox>
             <Grid.Column>2</Grid.Column>
-            <ui:Button x:Name="button" MouseEnter="StartShow" BorderThickness="0" Background="Gray" Padding="0,0,0,0">
-                <ui:SymbolIcon>
-                    <ui:SymbolIcon.FontSize>10</ui:SymbolIcon.FontSize>
-                    <ui:SymbolIcon.Symbol>SpeakerMute16</ui:SymbolIcon.Symbol>
-                </ui:SymbolIcon>
+            <ui:Button x:Name="button" BorderThickness="0" Background="Gray" Padding="0,0,0,0">
+                <DynamicResource ResourceKey="Medium"/>
             </ui:Button>
         </Viewbox>
 
@@ -61,10 +66,12 @@
             <Slider.SmallChange>0.01</Slider.SmallChange>
             <Slider.LargeChange>0.05</Slider.LargeChange>
             <Slider.Maximum>1</Slider.Maximum>
-            <Slider.Value>0.5</Slider.Value>
-            <Slider.Margin>0,0,0,0</Slider.Margin>
-            <Slider.Width>auto</Slider.Width>
+            <Slider.Value>
+                <Binding Path="Value" ElementName="ThisControl"/>
+            </Slider.Value>
+            <Slider.Margin>0,0,1,0</Slider.Margin>
             <Slider.VerticalAlignment>center</Slider.VerticalAlignment>
+            <Slider.VerticalContentAlignment>stretch</Slider.VerticalContentAlignment>
         </Slider>
     </Grid>
 </UserControl>

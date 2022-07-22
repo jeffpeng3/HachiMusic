@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,20 +21,38 @@ namespace musicplayer.Controls
     /// <summary>
     /// HideableSlider.xaml 的互動邏輯
     /// </summary>
-    public partial class HideableSlider : UserControl
+    public partial class HideableSlider : UserControl, INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler? PropertyChanged = delegate { };
+
+        public static readonly DependencyProperty ValueProperty = DependencyProperty.Register("Value", typeof(double), typeof(MusicView), new FrameworkPropertyMetadata(0.5));
+        public double Value
+        {
+            get { return (double)GetValue(ValueProperty); }
+            set { value = Math.Max(0, Math.Min(1, value)); SetValue(ValueProperty, value); ChangeIcon(value); OnPropertyChanged("Value"); }
+        }
         public HideableSlider()
         {
             InitializeComponent();
+            ThisControl.PreviewMouseWheel += (sender, e) =>
+            {
+                Value += slider.SmallChange * e.Delta / 120;
+            };
         }
-
-        private void StartShow(object sender, MouseEventArgs e)
+        private void ChangeIcon(double value)
         {
-            ShowSlider();
+            var target = value switch
+            {
+                0 => FindResource("Mute"),
+                < 0.33 => FindResource("Low"),
+                < 0.66 => FindResource("Medium"),
+                _ => FindResource("High")
+            };
+            button.Content = target;
         }
-
-        private void ShowSlider()
+        protected void OnPropertyChanged(string propName)
         {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
         }
     }
 }

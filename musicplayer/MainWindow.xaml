@@ -134,7 +134,7 @@
                     <ui:NavigationItem.Content>home</ui:NavigationItem.Content>
                     <ui:NavigationItem.PageTag>Home</ui:NavigationItem.PageTag>
                 </ui:NavigationItem>
-                <ui:NavigationItem PageType="{x:Type pages:DiscoverPage}">
+                <ui:NavigationItem PageType="{x:Type pages:DiscoverPage}" Cursor="Hand">
                     <ui:NavigationItem.Cache>true</ui:NavigationItem.Cache>
                     <ui:NavigationItem.Icon>earth24</ui:NavigationItem.Icon>
                     <ui:NavigationItem.Content>Discover</ui:NavigationItem.Content>
@@ -143,7 +143,7 @@
                 <ui:NavigationSeparator />
             </ui:NavigationCompact.Items>
             <ui:NavigationCompact.Footer>
-                <ui:NavigationItem PageType="{x:Type pages:MainPage}">
+                <ui:NavigationItem PageType="{x:Type pages:UserPage}">
                     <ui:NavigationItem.Cache>true</ui:NavigationItem.Cache>
                     <ui:NavigationItem.Icon>PersonCircle24</ui:NavigationItem.Icon>
                     <ui:NavigationItem.Content>User(WIP)</ui:NavigationItem.Content>
