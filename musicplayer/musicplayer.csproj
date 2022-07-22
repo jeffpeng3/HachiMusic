@@ -8,20 +8,21 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="image\Back.png" />
-    <None Remove="image\LoopAll.png" />
-    <None Remove="image\LoopAll.svg" />
-    <None Remove="image\LoopNone.png" />
-    <None Remove="image\LoopSingle.png" />
-    <None Remove="image\NoShuffle.png" />
-    <None Remove="image\Pause.png" />
-    <None Remove="image\Play.png" />
-    <None Remove="image\Shuffle.png" />
-    <None Remove="image\Stop.png" />
-    <None Remove="image\VolumeHigh.png" />
-    <None Remove="image\VolumeLow.png" />
-    <None Remove="image\VolumeMedium.png" />
-    <None Remove="image\VolumeMute.png" />
+    <None Remove="Resources\Back.png" />
+    <None Remove="Resources\LoopAll.png" />
+    <None Remove="Resources\LoopAll.svg" />
+    <None Remove="Resources\LoopNone.png" />
+    <None Remove="Resources\LoopSingle.png" />
+    <None Remove="Resources\NoShuffle.png" />
+    <None Remove="Resources\Pause.png" />
+    <None Remove="Resources\Play.png" />
+    <None Remove="Resources\Segoe Fluent Icons.ttf" />
+    <None Remove="Resources\Shuffle.png" />
+    <None Remove="Resources\Stop.png" />
+    <None Remove="Resources\VolumeHigh.png" />
+    <None Remove="Resources\VolumeLow.png" />
+    <None Remove="Resources\VolumeMedium.png" />
+    <None Remove="Resources\VolumeMute.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -45,17 +46,18 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="image\Back.png" />
-    <Resource Include="image\LoopAll.png" />
-    <Resource Include="image\LoopNone.png" />
-    <Resource Include="image\LoopSingle.png" />
-    <Resource Include="image\Pause.png" />
-    <Resource Include="image\Play.png" />
-    <Resource Include="image\Shuffle.png" />
-    <Resource Include="image\VolumeHigh.png" />
-    <Resource Include="image\VolumeLow.png" />
-    <Resource Include="image\VolumeMedium.png" />
-    <Resource Include="image\VolumeMute.png" />
+    <Resource Include="Resources\Back.png" />
+    <Resource Include="Resources\LoopAll.png" />
+    <Resource Include="Resources\LoopNone.png" />
+    <Resource Include="Resources\LoopSingle.png" />
+    <Resource Include="Resources\Pause.png" />
+    <Resource Include="Resources\Play.png" />
+    <Resource Include="Resources\Segoe Fluent Icons.ttf" />
+    <Resource Include="Resources\Shuffle.png" />
+    <Resource Include="Resources\VolumeHigh.png" />
+    <Resource Include="Resources\VolumeLow.png" />
+    <Resource Include="Resources\VolumeMedium.png" />
+    <Resource Include="Resources\VolumeMute.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -79,13 +81,19 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="image\Next.png">
+    <None Update="Resources\Next.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Pages\user.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.Threading;
+using musicplayer.Controls;
 using musicplayer.Modules;
 using System;
 using System.Collections.Concurrent;
@@ -89,10 +90,15 @@ namespace musicplayer
         {
             WindowState = WindowState.Minimized;
         }
-
         protected void OnPropertyChanged(string propName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
         }
+
+        private void OnAnyControlPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            //Console.WriteLine(e.PropertyName);
+        }
+
     }
 }

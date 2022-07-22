@@ -29,10 +29,10 @@ namespace musicplayer.Pages
             {
                 MusicView musicView = new()
                 {
-                    title = "『フタリボシ』 Ninomae Ina'nis & Tsukumo Sana (Cover)",
-                    artist = "Ninomae Ina'nis Ch. hololive-EN",
-                    dutation = new TimeSpan(0, 5, 5),
-                    src = new Uri(@"https://img.youtube.com/vi/84uvWfZqqeg/maxresdefault.jpg"),
+                    Title = "『フタリボシ』 Ninomae Ina'nis & Tsukumo Sana (Cover)",
+                    Artist = "Ninomae Ina'nis Ch. hololive-EN",
+                    Dutation = new TimeSpan(0, 5, 5),
+                    Src = new Uri(@"https://img.youtube.com/vi/84uvWfZqqeg/maxresdefault.jpg"),
                     Height = 55,
                     Margin = new Thickness(0, 5, 0, 0)
                 };
