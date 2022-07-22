@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace musicplayer.Modules
+namespace musicplayer.Enums
 {
-    public enum MessageTopic
+    public enum MessageTopicEnum
     {
         QueueUpdate,
         PlayingUpdate,
