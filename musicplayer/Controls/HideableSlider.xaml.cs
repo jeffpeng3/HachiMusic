@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Wpf.Ui.Controls;
+using XamlFlair;
 
 namespace musicplayer.Controls
 {
@@ -27,6 +28,11 @@ namespace musicplayer.Controls
         }
 
         private void StartShow(object sender, MouseEventArgs e)
+        {
+            ShowSlider();
+        }
+
+        private void ShowSlider()
         {
         }
     }

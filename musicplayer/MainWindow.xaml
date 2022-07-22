@@ -7,6 +7,7 @@
         xmlns:local="clr-namespace:musicplayer"
         xmlns:System="clr-namespace:System;assembly=System.Runtime" x:Name="uiWindow"
         xmlns:pages="clr-namespace:musicplayer.Pages"
+        xmlns:my="clr-namespace:musicplayer.Controls"
     
         Background="Transparent"
         ExtendsContentIntoTitleBar ="True"
@@ -255,16 +256,11 @@
                     <ui:SymbolIcon Symbol="ArrowWrap20" FontSize="6"/>
                 </ui:Button>
             </Viewbox>
-
-            <Viewbox Margin="10,25,10,5">
-                <Grid.Column>13</Grid.Column>
-                <ui:Button BorderThickness="0" Background="Gray" Padding="0,0,0,0">
-                    <ui:Button.Width>10</ui:Button.Width>
-                    <ui:Button.Height>10</ui:Button.Height>
-                    <ui:SymbolIcon Symbol="Speaker224" FontSize="6"/>
-                </ui:Button>
-            </Viewbox>
-
+            <my:HideableSlider Margin="10,25,10,5">
+                <Grid.Column>11</Grid.Column>
+                <Grid.ColumnSpan>3</Grid.ColumnSpan>
+                <my:HideableSlider.HorizontalAlignment>Right</my:HideableSlider.HorizontalAlignment>
+            </my:HideableSlider>
         </Grid>
 
     </Grid>

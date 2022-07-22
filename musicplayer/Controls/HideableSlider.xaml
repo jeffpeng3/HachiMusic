@@ -7,24 +7,51 @@
              xmlns:xf="clr-namespace:XamlFlair;assembly=XamlFlair.WPF"
              xmlns:local="clr-namespace:musicplayer.Controls"
              mc:Ignorable="d" 
-             d:DesignHeight="100" d:DesignWidth="800">
+             x:Name="ThisControl"
+             d:DesignHeight="20" d:DesignWidth="120">
+    <UserControl.Resources>
+        <Style x:Key="PropertyTriggerExampleButtonStyle" TargetType="{x:Type Slider}" BasedOn="{StaticResource {x:Type Slider}}">
+            <Setter Property="Opacity" Value="0" />
+            <Style.Triggers>
+                <DataTrigger  Binding="{Binding Path=IsMouseOver ,ElementName=button}" Value="True">
+                    <DataTrigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Storyboard.TargetProperty="Opacity" To="1" Duration="0:0:0.5" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </DataTrigger.EnterActions>
+                </DataTrigger>
+                <DataTrigger  Binding="{Binding Path=IsMouseOver ,ElementName=ThisControl}" Value="True">
+                    <DataTrigger.ExitActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Storyboard.TargetProperty="Opacity" To="0" Duration="0:0:0.5" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </DataTrigger.ExitActions>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
-        <ui:Button x:Name="button" Background="{x:Null}" MouseEnter="StartShow">
+        <Viewbox>
             <Grid.Column>1</Grid.Column>
-            <ui:SymbolIcon>
-                <ui:SymbolIcon.FontSize>100</ui:SymbolIcon.FontSize>
-                <ui:SymbolIcon.Symbol>SpeakerMute16</ui:SymbolIcon.Symbol>
-            </ui:SymbolIcon>
-        </ui:Button>
+            <ui:Button x:Name="button" MouseEnter="StartShow" BorderThickness="0" Background="Gray" Padding="0,0,0,0">
+                <ui:SymbolIcon>
+                    <ui:SymbolIcon.FontSize>10</ui:SymbolIcon.FontSize>
+                    <ui:SymbolIcon.Symbol>SpeakerMute16</ui:SymbolIcon.Symbol>
+                </ui:SymbolIcon>
+            </ui:Button>
+        </Viewbox>
 
-        <Slider x:Name="slider" xf:Animations.Primary="{StaticResource FadeIn}">
-            <Slider.Visibility>Hidden</Slider.Visibility>
-            <Slider.Opacity>0</Slider.Opacity>
-            <Slider.Margin>15</Slider.Margin>
+        <Slider x:Name="slider" Style="{DynamicResource PropertyTriggerExampleButtonStyle}" >
+            <Slider.Margin>10,0,30,0</Slider.Margin>
             <Slider.VerticalAlignment>center</Slider.VerticalAlignment>
         </Slider>
     </Grid>
