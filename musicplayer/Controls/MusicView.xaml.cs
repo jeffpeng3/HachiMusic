@@ -20,13 +20,13 @@ namespace musicplayer.Controls
     /// </summary>
     public partial class MusicView : UserControl
     {
-        public static readonly DependencyProperty dutationProperty = DependencyProperty.Register("dutation", typeof(TimeSpan), typeof(MusicView), new FrameworkPropertyMetadata(TimeSpan.Zero));
+        public static readonly DependencyProperty dutationProperty = DependencyProperty.Register("Dutation", typeof(TimeSpan), typeof(MusicView), new FrameworkPropertyMetadata(TimeSpan.Zero));
 
-        public static readonly DependencyProperty artistProperty = DependencyProperty.Register("artist", typeof(string), typeof(MusicView), new FrameworkPropertyMetadata(string.Empty));
+        public static readonly DependencyProperty artistProperty = DependencyProperty.Register("Artist", typeof(string), typeof(MusicView), new FrameworkPropertyMetadata(string.Empty));
 
-        public static readonly DependencyProperty titleProperty = DependencyProperty.Register("title", typeof(string), typeof(MusicView), new FrameworkPropertyMetadata(string.Empty));
+        public static readonly DependencyProperty titleProperty = DependencyProperty.Register("Title", typeof(string), typeof(MusicView), new FrameworkPropertyMetadata(string.Empty));
 
-        public static readonly DependencyProperty srcProperty = DependencyProperty.Register("src", typeof(Uri), typeof(MusicView), new FrameworkPropertyMetadata(new Uri("https://img.youtube.com/vi/%3Cinsert-youtube-video-id-here%3E/maxresdefault.jpg")));
+        public static readonly DependencyProperty srcProperty = DependencyProperty.Register("Src", typeof(Uri), typeof(MusicView), new FrameworkPropertyMetadata(new Uri("https://img.youtube.com/vi/%3Cinsert-youtube-video-id-here%3E/maxresdefault.jpg")));
         public TimeSpan Dutation
         {
             get { return (TimeSpan)GetValue(dutationProperty); }

@@ -43,26 +43,35 @@ namespace musicplayer
 
         private async void OnSearch(object sender, KeyEventArgs e)
         {
-            if(e.Key != Key.Enter)
+            if (e.Key != Key.Enter)
             {
                 return;
             }
             var TargetString = ((TextBox)sender).Text;
+            if (string.IsNullOrEmpty(TargetString))
+            {
+                return;
+            }
             if (Utils.IsValidAddress(TargetString))
             {
+                ((TextBox)sender).Text = string.Empty;
                 var ThisSong = await Song.TryCreateSongAsync(TargetString);
+
                 /*
                  * 
                  * Add this song to music player and update front-end.
                  * 
                  */
-                ((TextBox)sender).Text = string.Empty;
                 return;
             }
             else
             {
-                RootNavigation.Navigate("Discover");
-                var page = RootNavigation.Current?.Content as DiscoverPage;
+                if (RootNavigation.Current?.PageTag != "Discover")
+                {
+                    RootNavigation.Navigate("Discover");
+                    await Task.Delay(100);
+                }
+                var page = RootFrame.Content as DiscoverPage;
                 _ = page?.SearchAsync(TargetString);
             }
         }

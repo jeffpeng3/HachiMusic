@@ -84,7 +84,7 @@
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
-            <ui:TextBox KeyDown="OnSearch" >
+            <ui:TextBox KeyDown="OnSearch" Cursor="IBeam" >
                 <ui:TextBox.Margin>5,10,5,5</ui:TextBox.Margin>
                 <ui:TextBox.Icon>search12</ui:TextBox.Icon>
                 <ui:TextBox.PlaceholderText>輸入網址或要查詢的音樂</ui:TextBox.PlaceholderText>
