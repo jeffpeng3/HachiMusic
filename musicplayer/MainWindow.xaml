@@ -137,7 +137,7 @@
                     <ui:NavigationItem.Content>home</ui:NavigationItem.Content>
                     <ui:NavigationItem.PageTag>Home</ui:NavigationItem.PageTag>
                 </ui:NavigationItem>
-                <ui:NavigationItem PageType="{x:Type pages:DiscoverPage}" x:Name="ThisDiscoverPage">
+                <ui:NavigationItem PageType="{x:Type pages:DiscoverPage}">
                     <ui:NavigationItem.Cache>true</ui:NavigationItem.Cache>
                     <ui:NavigationItem.Icon>earth24</ui:NavigationItem.Icon>
                     <ui:NavigationItem.Content>Discover</ui:NavigationItem.Content>
