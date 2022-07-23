@@ -25,5 +25,10 @@ namespace musicplayer.Pages
         {
             InitializeComponent();
         }
+
+        public async Task SearchAsync(string target)
+        {
+
+        }
     }
 }

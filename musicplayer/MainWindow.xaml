@@ -84,7 +84,7 @@
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
-            <ui:TextBox>
+            <ui:TextBox KeyDown="OnSearch" >
                 <ui:TextBox.Margin>5,10,5,5</ui:TextBox.Margin>
                 <ui:TextBox.Icon>search12</ui:TextBox.Icon>
                 <ui:TextBox.PlaceholderText>輸入網址或要查詢的音樂</ui:TextBox.PlaceholderText>
@@ -120,7 +120,7 @@
             Grid.Row="1"
             Grid.Column="1"
             Margin="10"/>
-        <ui:NavigationCompact Frame="{Binding ElementName=RootFrame}">
+        <ui:NavigationCompact x:Name="RootNavigation" Frame="{Binding ElementName=RootFrame}">
             <Grid.Row>0</Grid.Row>
             <Grid.RowSpan>3</Grid.RowSpan>
             <ui:NavigationCompact.MaxWidth>130</ui:NavigationCompact.MaxWidth>
@@ -137,7 +137,7 @@
                     <ui:NavigationItem.Content>home</ui:NavigationItem.Content>
                     <ui:NavigationItem.PageTag>Home</ui:NavigationItem.PageTag>
                 </ui:NavigationItem>
-                <ui:NavigationItem PageType="{x:Type pages:DiscoverPage}" Cursor="Hand">
+                <ui:NavigationItem PageType="{x:Type pages:DiscoverPage}" x:Name="ThisDiscoverPage">
                     <ui:NavigationItem.Cache>true</ui:NavigationItem.Cache>
                     <ui:NavigationItem.Icon>earth24</ui:NavigationItem.Icon>
                     <ui:NavigationItem.Content>Discover</ui:NavigationItem.Content>

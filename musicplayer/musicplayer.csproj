@@ -46,18 +46,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Resources\Back.png" />
-    <Resource Include="Resources\LoopAll.png" />
-    <Resource Include="Resources\LoopNone.png" />
-    <Resource Include="Resources\LoopSingle.png" />
-    <Resource Include="Resources\Pause.png" />
-    <Resource Include="Resources\Play.png" />
     <Resource Include="Resources\Segoe Fluent Icons.ttf" />
-    <Resource Include="Resources\Shuffle.png" />
-    <Resource Include="Resources\VolumeHigh.png" />
-    <Resource Include="Resources\VolumeLow.png" />
-    <Resource Include="Resources\VolumeMedium.png" />
-    <Resource Include="Resources\VolumeMute.png" />
   </ItemGroup>
 
   <ItemGroup>
