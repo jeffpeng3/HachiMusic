@@ -17,6 +17,12 @@ namespace musicplayer.Modules
 
             }
         }
+
+        static Player CurrentPlayer
+        {
+            get { return CurrentPlayer; }
+            set { CurrentPlayer = value; }
+        }
         bool isMute
         {
             get { return isMute; }
@@ -53,10 +59,11 @@ namespace musicplayer.Modules
         {
             ListIndex = 0;
             Volume = 0.5;
-            isMute=false;
+            isMute = false;
             Position = TimeSpan.Zero;
             Status = PlayStatusEmun.NotPlaying;
             LoopMode = LoopModeEnum.LoopNone;
+            CurrentPlayer = this;
         }
         public ObservableCollection<Song> GetSongs() => SongList;
         public void Play(int index = -1)
