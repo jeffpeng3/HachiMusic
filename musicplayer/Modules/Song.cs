@@ -35,16 +35,13 @@ namespace musicplayer.Modules
             Duration = _duration;
             VideoId = _videoId;
         }
-        public async static Task<Song> CreateSongAsync(string url)
+        public async static Task<Song?> TryCreateSongAsync(string url)
         {
-            Uri? targetUrl;
-            string reg = @"^((http[s]?):\/)?\/?([^:\/\s]+)((\/\w+)*\/)([\w\-\.]+[^#?\s]+)(.*)?(#[\w\-]+)?$";
-            Regex r = new(reg);
-            Match m = r.Match(url);
-            if (!m.Success)
+            if (!Utils.IsValidAddress(url))
             {
-                throw new Exception("can't recognized url");
+                return null;
             }
+            Uri? targetUrl;
             targetUrl = new Uri(url);
             var MusicMetadata = await youtube.Videos.GetAsync(url);
             var MusicManifest = await youtube.Videos.Streams.GetManifestAsync(url);

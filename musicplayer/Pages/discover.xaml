@@ -11,8 +11,9 @@
     Title="DiscoverPage">
 
     <Grid>
-        <ui:Button>
-            OOOOOOO
-        </ui:Button>
+        <ui:ProgressRing IsIndeterminate="True" Progress="80" x:Name="Ring" Visibility="Collapsed"/>
+        <ListBox ScrollViewer.CanContentScroll="False" x:Name="ThisList" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ListBox.Margin>0,10,0,0</ListBox.Margin>
+        </ListBox>
     </Grid>
 </ui:UiPage>

@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.Threading;
 using musicplayer.Controls;
 using musicplayer.Modules;
+using musicplayer.Pages;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -39,6 +40,48 @@ namespace musicplayer
             IsPadOpen = true;
             InitializeComponent();
         }
+
+        private async void OnSearch(object sender, KeyEventArgs e)
+        {
+            if (e.Key != Key.Enter)
+            {
+                return;
+            }
+            var TargetString = ((TextBox)sender).Text;
+            if (string.IsNullOrEmpty(TargetString))
+            {
+                return;
+            }
+            if (Utils.IsValidAddress(TargetString))
+            {
+                ((TextBox)sender).Text = string.Empty;
+                var ThisSong = await Song.TryCreateSongAsync(TargetString);
+
+                /*
+                 * 
+                 * Add this song to music player and update front-end.
+                 * 
+                 */
+                return;
+            }
+            else
+            {
+                if (RootNavigation.Current?.PageTag != "Discover")
+                {
+                    RootNavigation.Navigate("Discover");
+                    await Task.Delay(100);
+                }
+                var page = RootFrame.Content as DiscoverPage;
+                _ = page?.SearchAsync(TargetString);
+            }
+        }
+
+
+
+
+
+
+
         private void PadOpenOrClose(object sender, RoutedEventArgs e)
         {
             IsPadOpen = !IsPadOpen;
@@ -99,6 +142,5 @@ namespace musicplayer
         {
             //Console.WriteLine(e.PropertyName);
         }
-
     }
 }
