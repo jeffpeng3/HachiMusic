@@ -50,13 +50,11 @@ namespace musicplayer.Pages
                     Src = await task
                 };
                 ThisList.Items.Add(musicView);
-
-                AddSong
             }
         }
-        private async Task WhenDoubleClickSong()
+        private async void WhenDoubleClickSong()
         {
-            Player.
+
         }
 
     }

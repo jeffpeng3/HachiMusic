@@ -27,6 +27,7 @@ namespace musicplayer.Controls
         public static readonly DependencyProperty titleProperty = DependencyProperty.Register("Title", typeof(string), typeof(MusicView), new FrameworkPropertyMetadata(string.Empty));
 
         public static readonly DependencyProperty srcProperty = DependencyProperty.Register("Src", typeof(Uri), typeof(MusicView), new FrameworkPropertyMetadata(new Uri("https://img.youtube.com/vi/%3Cinsert-youtube-video-id-here%3E/maxresdefault.jpg")));
+
         public TimeSpan Dutation
         {
             get { return (TimeSpan)GetValue(dutationProperty); }

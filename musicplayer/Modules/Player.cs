@@ -18,11 +18,6 @@ namespace musicplayer.Modules
             }
         }
 
-        static Player CurrentPlayer
-        {
-            get { return CurrentPlayer; }
-            set { CurrentPlayer = value; }
-        }
         bool isMute
         {
             get { return isMute; }
