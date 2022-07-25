@@ -1,22 +1,12 @@
-﻿using musicplayer.Controls;
-using musicplayer.Modules;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using Wpf.Ui.Controls;
 using YoutubeExplode;
+using Wpf.Ui.Controls;
+using musicplayer.Modules;
+using System.Windows.Input;
+using musicplayer.Controls;
 using YoutubeExplode.Common;
+using System.Threading.Tasks;
 
 namespace musicplayer.Pages
 {
@@ -49,10 +39,11 @@ namespace musicplayer.Pages
                     Margin = new Thickness(0, 5, 0, 0),
                     Src = await task
                 };
+                musicView.MouseDoubleClick += WhenDoubleClickSong;
                 ThisList.Items.Add(musicView);
             }
         }
-        private async void WhenDoubleClickSong()
+        private async void WhenDoubleClickSong(object sender, MouseButtonEventArgs e)
         {
 
         }

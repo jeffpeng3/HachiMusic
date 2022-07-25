@@ -1,15 +1,15 @@
-﻿using musicplayer.Enums;
-using System;
+﻿using System;
+using musicplayer.Enums;
 using System.Collections.ObjectModel;
 
 namespace musicplayer.Modules
 {
     public class Player
     {
-        readonly ObservableCollection<Song> SongList = new();
+        public static readonly ObservableCollection<Song> SongList;
         // List<int> ReapeatTimes;
-        int ListIndex;
-        double Volume
+        public static int ListIndex { get; private set; }
+        public static double Volume
         {
             get { return Volume; }
             set
@@ -17,8 +17,7 @@ namespace musicplayer.Modules
 
             }
         }
-
-        bool isMute
+        public static bool isMute
         {
             get { return isMute; }
             set
@@ -26,7 +25,7 @@ namespace musicplayer.Modules
 
             }
         }
-        TimeSpan Position
+        public static TimeSpan Position
         {
             get { return Position; }
             set
@@ -34,7 +33,7 @@ namespace musicplayer.Modules
 
             }
         }
-        PlayStatusEmun Status
+        public static PlayStatusEmun Status
         {
             get { return Status; }
             set
@@ -42,7 +41,7 @@ namespace musicplayer.Modules
 
             }
         }
-        LoopModeEnum LoopMode
+        public static LoopModeEnum LoopMode
         {
             get { return LoopMode; }
             set
@@ -50,7 +49,8 @@ namespace musicplayer.Modules
 
             }
         }
-        public Player()
+        public static Player? CurrentPlayer { get; set; }
+        static Player()
         {
             ListIndex = 0;
             Volume = 0.5;
@@ -58,9 +58,12 @@ namespace musicplayer.Modules
             Position = TimeSpan.Zero;
             Status = PlayStatusEmun.NotPlaying;
             LoopMode = LoopModeEnum.LoopNone;
+            SongList = new();
+        }
+        public Player()
+        {
             CurrentPlayer = this;
         }
-        public ObservableCollection<Song> GetSongs() => SongList;
         public void Play(int index = -1)
         {
 

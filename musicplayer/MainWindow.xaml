@@ -20,8 +20,8 @@
         <ui:SymbolIcon x:Key="window_normalize" Symbol="SquareMultiple16"/>
         <ui:SymbolIcon x:Key="window_minimize" Symbol="Subtract16"/>
         <ui:SymbolIcon x:Key="menu_right" Symbol="PaddingRight20"/>
-        <ui:FontIcon x:Key="LoopOff"  Glyph="&#xf5e7;" FontFamily="{DynamicResource SegoeFluentIcons}" FontSize="6"/>
-        <ui:FontIcon x:Key="LoopOnce"  Glyph="&#xe8ed;" FontFamily="{DynamicResource SegoeFluentIcons}" FontSize="6"/>
+        <ui:FontIcon x:Key="LoopNone"  Glyph="&#xf5e7;" FontFamily="{DynamicResource SegoeFluentIcons}" FontSize="6"/>
+        <ui:FontIcon x:Key="LoopSingle"  Glyph="&#xe8ed;" FontFamily="{DynamicResource SegoeFluentIcons}" FontSize="6"/>
         <ui:FontIcon x:Key="LoopAll"  Glyph="&#xe8ee;" FontFamily="{DynamicResource SegoeFluentIcons}" FontSize="6"/>
 
         <Style x:Key="ForMaxOrNormal" TargetType="{x:Type ui:Button}" BasedOn="{StaticResource {x:Type ui:Button}}">
@@ -215,10 +215,10 @@
 
             <Viewbox Margin="10,25,10,5">
                 <Grid.Column>5</Grid.Column>
-                <ui:Button BorderThickness="0" Background="Gray" Padding="0,0,0,0">
+                <ui:Button BorderThickness="0" Background="Gray" Padding="0,0,0,0" Click="LoopButtonClick">
                     <ui:Button.Width>10</ui:Button.Width>
                     <ui:Button.Height>10</ui:Button.Height>
-                    <DynamicResource ResourceKey="LoopOnce"/>
+                    <DynamicResource ResourceKey="LoopNone"/>
                     <!--ui:SymbolIcon Symbol="ArrowRepeatAll24" FontSize="6"/-->
                 </ui:Button>
             </Viewbox>

@@ -1,25 +1,13 @@
-﻿using Microsoft.VisualStudio.Threading;
-using musicplayer.Controls;
-using musicplayer.Modules;
-using musicplayer.Pages;
-using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 using System.Windows;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Windows.Threading;
 using Wpf.Ui.Controls;
-using Wpf.Ui.Extensions;
+using musicplayer.Enums;
+using musicplayer.Pages;
+using musicplayer.Modules;
+using System.Windows.Input;
+using System.ComponentModel;
+using System.Threading.Tasks;
+using Microsoft.VisualStudio.Threading;
 
 namespace musicplayer
 {
@@ -40,7 +28,6 @@ namespace musicplayer
             IsPadOpen = true;
             InitializeComponent();
         }
-
         private async void OnSearch(object sender, KeyEventArgs e)
         {
             if (e.Key != Key.Enter)
@@ -75,13 +62,6 @@ namespace musicplayer
                 _ = page?.SearchAsync(TargetString);
             }
         }
-
-
-
-
-
-
-
         private void PadOpenOrClose(object sender, RoutedEventArgs e)
         {
             IsPadOpen = !IsPadOpen;
@@ -141,6 +121,13 @@ namespace musicplayer
         private void OnAnyControlPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             //Console.WriteLine(e.PropertyName);
+        }
+
+        private void LoopButtonClick(object sender, RoutedEventArgs e)
+        {
+            if (sender is not Button btn)
+                return;
+            btn.Content = FindResource(Enum.GetName(typeof(LoopModeEnum), Player.LoopMode));
         }
     }
 }
