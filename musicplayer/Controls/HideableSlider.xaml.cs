@@ -37,7 +37,7 @@ namespace musicplayer.Controls
         private void MuteToggle(object sender, RoutedEventArgs e)
         {
             Mute = !Mute;
-            Player.isMute = Mute;
+            Player.IsMute = Mute;
             if (Mute)
             {
                 button.Content = FindResource("Mute");

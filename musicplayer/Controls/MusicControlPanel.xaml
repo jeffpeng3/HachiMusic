@@ -111,7 +111,8 @@
 
         <Viewbox Margin="10,25,10,5">
             <Grid.Column>9</Grid.Column>
-            <ui:Button BorderThickness="0" Background="Gray" Padding="0,0,0,0">
+            <ui:Button BorderThickness="0" Background="Gray" 
+                       Padding="0,0,0,0" Click="RandomButtonClick">
                 <ui:Button.Width>10</ui:Button.Width>
                 <ui:Button.Height>10</ui:Button.Height>
                 <ui:FontIcon Glyph="&#xe8b1;" FontFamily="{DynamicResource SegoeFluentIcons}" FontSize="6"/>

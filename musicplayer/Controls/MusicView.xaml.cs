@@ -14,7 +14,7 @@ namespace musicplayer.Controls
     public partial class MusicView : UserControl
     {
         static readonly YoutubeClient youtube = new();
-        public static readonly DependencyProperty dutationProperty = DependencyProperty.Register("Dutation", typeof(TimeSpan), typeof(MusicView), new FrameworkPropertyMetadata(TimeSpan.Zero));
+        public static readonly DependencyProperty dutationProperty = DependencyProperty.Register("Duration", typeof(TimeSpan), typeof(MusicView), new FrameworkPropertyMetadata(TimeSpan.Zero));
 
         public static readonly DependencyProperty artistProperty = DependencyProperty.Register("Artist", typeof(string), typeof(MusicView), new FrameworkPropertyMetadata(string.Empty));
 
