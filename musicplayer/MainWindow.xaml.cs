@@ -127,6 +127,7 @@ namespace musicplayer
         {
             if (sender is not Button btn)
                 return;
+            Player.LoopMode = (LoopModeEnum)(((int)Player.LoopMode + 1) % 3);
             btn.Content = FindResource(Enum.GetName(typeof(LoopModeEnum), Player.LoopMode));
         }
     }

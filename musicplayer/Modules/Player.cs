@@ -6,59 +6,23 @@ namespace musicplayer.Modules
 {
     public class Player
     {
-        public static readonly ObservableCollection<Song> SongList;
-        // List<int> ReapeatTimes;
-        public static int ListIndex { get; private set; }
-        public static double Volume
-        {
-            get { return Volume; }
-            set
-            {
+        public static readonly ObservableCollection<Song> SongList = new();
 
-            }
-        }
+        // List<int> ReapeatTimes;
+        public static int ListIndex { get; private set; } = 0;
+        public static double Volume { get; set; } = 0.5;
         public static bool isMute
         {
             get { return isMute; }
-            set
-            {
-
-            }
+            set { isMute = value; }
         }
-        public static TimeSpan Position
-        {
-            get { return Position; }
-            set
-            {
-
-            }
-        }
-        public static PlayStatusEmun Status
-        {
-            get { return Status; }
-            set
-            {
-
-            }
-        }
-        public static LoopModeEnum LoopMode
-        {
-            get { return LoopMode; }
-            set
-            {
-
-            }
-        }
-        public static Player? CurrentPlayer { get; set; }
+        public static TimeSpan Position { get; set; } = TimeSpan.Zero;
+        public static PlayStatusEmun Status { get; set; } = PlayStatusEmun.NotPlaying;
+        public static LoopModeEnum LoopMode { get; set; } = LoopModeEnum.LoopNone;
+        public static Player? CurrentPlayer { get; set; } = null;
         static Player()
         {
-            ListIndex = 0;
-            Volume = 0.5;
             isMute = false;
-            Position = TimeSpan.Zero;
-            Status = PlayStatusEmun.NotPlaying;
-            LoopMode = LoopModeEnum.LoopNone;
-            SongList = new();
         }
         public Player()
         {
