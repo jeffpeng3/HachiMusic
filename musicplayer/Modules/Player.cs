@@ -16,10 +16,6 @@ namespace musicplayer.Modules
         public static PlayStatusEmun Status { get; set; } = PlayStatusEmun.NotPlaying;
         public static LoopModeEnum LoopMode { get; set; } = LoopModeEnum.LoopNone;
         public static Player? CurrentPlayer { get; set; } = null;
-        static Player()
-        {
-            isMute = false;
-        }
         public Player()
         {
             CurrentPlayer = this;
