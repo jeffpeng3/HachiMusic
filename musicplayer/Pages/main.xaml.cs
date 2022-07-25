@@ -2,6 +2,7 @@
 using System.Windows;
 using Wpf.Ui.Controls;
 using musicplayer.Controls;
+using musicplayer.Modules;
 
 namespace musicplayer.Pages
 {
@@ -13,6 +14,7 @@ namespace musicplayer.Pages
         public MainPage()
         {
             InitializeComponent();
+            QueueList.ItemsSource = Player.SongList;
             /*
             for (int i = 0; i < 10; i++)
             {
@@ -29,5 +31,6 @@ namespace musicplayer.Pages
             }
             */
         }
+
     }
 }

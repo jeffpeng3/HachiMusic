@@ -1,9 +1,9 @@
 ﻿namespace musicplayer.Enums
 {
-    public enum PlayStatusEmun
+    public enum PlayStatusEnum
     {
         NotPlaying,
-        Play,
+        Playing,
         Pause
     }
 }
