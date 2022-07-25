@@ -32,9 +32,18 @@ namespace musicplayer.Modules
         {
 
         }
-        public void AddSong(string url)
+        public void AddSong(Song song)
         {
+            SongList.Add(song);
+        }
 
+        public async void AddSong(string url)
+        {
+            var song = await Song.TryCreateSongAsync(url);
+            if (song is not null)
+            {
+                AddSong(song);
+            }
         }
         public void AfterPlay()
         {

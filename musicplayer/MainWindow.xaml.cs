@@ -27,6 +27,7 @@ namespace musicplayer
         {
             IsPadOpen = true;
             InitializeComponent();
+            _ = new Player();
         }
         private async void OnSearch(object sender, KeyEventArgs e)
         {
@@ -43,12 +44,12 @@ namespace musicplayer
             {
                 ((TextBox)sender).Text = string.Empty;
                 var ThisSong = await Song.TryCreateSongAsync(TargetString);
-
-                /*
-                 * 
-                 * Add this song to music player and update front-end.
-                 * 
-                 */
+                if (ThisSong is null)
+                {
+                    return;
+                }
+                var player = Player.CurrentPlayer;
+                player?.AddSong(ThisSong);
                 return;
             }
             else
@@ -127,8 +128,8 @@ namespace musicplayer
         {
             if (sender is not Button btn)
                 return;
-            Player.LoopMode = (LoopModeEnum)(((int)Player.LoopMode + 1) % 3);
-            btn.Content = FindResource(Enum.GetName(typeof(LoopModeEnum), Player.LoopMode));
+            Player.LoopMode = Player.LoopMode.Next();
+            btn.Content = FindResource(Enum.GetName(Player.LoopMode));
         }
     }
 }
