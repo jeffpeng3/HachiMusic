@@ -30,7 +30,7 @@ namespace musicplayer.Modules
             return m.Success;
         }
 
-        public async static Task<Uri> GetMaxResolutionAsync(string VideoId)
+        public async static Task<Uri> GetMaxResolutionAsync(string? VideoId)
         {
             List<string> list = new List<string>()
             {

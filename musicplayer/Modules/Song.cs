@@ -42,15 +42,17 @@ namespace musicplayer.Modules
             }
             Uri? targetUrl;
             targetUrl = new Uri(url);
-            var MusicMetadata = await youtube.Videos.GetAsync(url);
-            var MusicManifest = await youtube.Videos.Streams.GetManifestAsync(url);
-
-            var streamUrl = new Uri(MusicManifest.GetAudioOnlyStreams().GetWithHighestBitrate().Url);
+            var T1 = youtube.Videos.GetAsync(url);
+            var T2 = youtube.Videos.Streams.GetManifestAsync(url);
+            var MusicMetadata = await T1;
+            var T3 = Utils.GetMaxResolutionAsync(MusicMetadata.Id);
             var title = MusicMetadata.Title;
             var artist = MusicMetadata.Author.ChannelTitle;
-            var thumbnails = new Uri(MusicMetadata.Thumbnails.OrderBy(x => x.Resolution.Area).Last().Url);
             var duration = MusicMetadata.Duration ?? TimeSpan.Zero;
             var videoID = MusicMetadata.Id;
+            var thumbnails = await T3;
+            var MusicManifest = await T2;
+            var streamUrl = new Uri(MusicManifest.GetAudioOnlyStreams().GetWithHighestBitrate().Url);
             return new Song(streamUrl, title, artist, thumbnails, duration, videoID);
         }
     }

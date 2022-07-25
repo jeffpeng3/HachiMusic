@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Windows;
 using YoutubeExplode;
 using Wpf.Ui.Controls;
@@ -7,6 +8,8 @@ using System.Windows.Input;
 using musicplayer.Controls;
 using YoutubeExplode.Common;
 using System.Threading.Tasks;
+using YoutubeExplode.Search;
+using System.Collections.Generic;
 
 namespace musicplayer.Pages
 {
@@ -26,23 +29,30 @@ namespace musicplayer.Pages
             ThisList.Items.Clear();
             Ring.Visibility = Visibility.Visible;
             var videos = await Youtube.Search.GetVideosAsync(target).CollectAsync(30);
-            Ring.Visibility = Visibility.Collapsed;
+            List<Task<MusicView?>> TaskList = new();
             foreach (var item in videos)
             {
-                var task = Utils.GetMaxResolutionAsync(item.Id);
-                MusicView musicView = new()
-                {
-                    Title = item.Title,
-                    Artist = item.Author.ChannelTitle,
-                    Duration = (TimeSpan)item.Duration,
-                    Height = 55,
-                    Margin = new Thickness(0, 5, 0, 0),
-                    Tag = item.Id,
-                    Src = await task
-                };
-                musicView.MouseDoubleClick += WhenDoubleClickSong;
-                ThisList.Items.Add(musicView);
+                TaskList.Add(func(item));
             }
+            await Task.WhenAny(TaskList);
+            Ring.Visibility = Visibility.Collapsed;
+            foreach (var item in TaskList)
+            {
+                ThisList.Items.Add(await item);
+            }
+
+            async Task<MusicView?> func(VideoSearchResult item)
+            {
+                var T1 = MusicView.TryToCreateMusicViewAsync(item.Url);
+                if (await T1 is not MusicView musicView)
+                {
+                    return null;
+                }
+                musicView.Tag = item.Id;
+                musicView.MouseDoubleClick += WhenDoubleClickSong;
+                return musicView;
+            }
+
         }
         private async void WhenDoubleClickSong(object sender, MouseButtonEventArgs e)
         {
@@ -51,8 +61,7 @@ namespace musicplayer.Pages
                 return;
             }
             var URL = $"https://www.youtube.com/watch?v={temp.Tag}";
-            var song = await Song.TryCreateSongAsync(URL);
-            if (song == null)
+            if (await Song.TryCreateSongAsync(URL) is not Song song)
             {
                 return;
             }
