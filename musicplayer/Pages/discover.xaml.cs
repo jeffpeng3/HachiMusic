@@ -37,6 +37,7 @@ namespace musicplayer.Pages
                     Duration = (TimeSpan)item.Duration,
                     Height = 55,
                     Margin = new Thickness(0, 5, 0, 0),
+                    Tag = item.Id,
                     Src = await task
                 };
                 musicView.MouseDoubleClick += WhenDoubleClickSong;
@@ -45,7 +46,17 @@ namespace musicplayer.Pages
         }
         private async void WhenDoubleClickSong(object sender, MouseButtonEventArgs e)
         {
-
+            if (sender is not MusicView temp)
+            {
+                return;
+            }
+            var URL = $"https://www.youtube.com/watch?v={temp.Tag}";
+            var song = await Song.TryCreateSongAsync(URL);
+            if (song == null)
+            {
+                return;
+            }
+            Player.CurrentPlayer?.AddSong(song);
         }
 
     }

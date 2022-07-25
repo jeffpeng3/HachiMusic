@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Windows;
 using Wpf.Ui.Controls;
 using musicplayer.Enums;
