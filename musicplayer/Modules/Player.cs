@@ -13,8 +13,8 @@ namespace musicplayer.Modules
         public static double Volume { get; set; } = 0.5;
         public static bool isMute
         {
-            get { return isMute; }
-            set { isMute = value; }
+            get;
+            set;
         }
         public static TimeSpan Position { get; set; } = TimeSpan.Zero;
         public static PlayStatusEmun Status { get; set; } = PlayStatusEmun.NotPlaying;
