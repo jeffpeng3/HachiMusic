@@ -2,6 +2,7 @@
 using System.Windows;
 using System.ComponentModel;
 using System.Windows.Controls;
+using musicplayer.Modules;
 
 namespace musicplayer.Controls
 {
@@ -18,7 +19,7 @@ namespace musicplayer.Controls
         public double Value
         {
             get { return (double)GetValue(ValueProperty); }
-            set { if (Mute) Mute = false; value = Math.Max(0, Math.Min(1, value)); SetValue(ValueProperty, value); ChangeIcon(value); OnPropertyChanged("Value"); }
+            set { if (Mute) Mute = false; value = Math.Max(0, Math.Min(1, value)); SetValue(ValueProperty, value); ChangeIcon(value); Player.Volume = value; OnPropertyChanged("Value"); }
         }
         public bool Mute
         {
@@ -36,6 +37,7 @@ namespace musicplayer.Controls
         private void MuteToggle(object sender, RoutedEventArgs e)
         {
             Mute = !Mute;
+            Player.isMute = Mute;
             if (Mute)
             {
                 button.Content = FindResource("Mute");
