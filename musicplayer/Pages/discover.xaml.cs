@@ -51,7 +51,11 @@ namespace musicplayer.Pages
                 };
                 ThisList.Items.Add(musicView);
             }
+        }
+        private async void WhenDoubleClickSong()
+        {
 
         }
+
     }
 }
