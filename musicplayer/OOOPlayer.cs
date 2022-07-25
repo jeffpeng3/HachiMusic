@@ -18,13 +18,13 @@ namespace musicplayer.Modules
         public LoopModeEnum LoopMode;
         public double volume;
         public Song? nowPlaying;
-        public PlayStatusEmun status;
+        public PlayStatusEnum status;
         readonly AsyncQueue<MessageTopicEnum> MessageQueue;
 
         public OOOPlayer(AsyncQueue<MessageTopicEnum> _MessageQueue)
         {
             Mute = false;
-            status = PlayStatusEmun.NotPlaying;
+            status = PlayStatusEnum.NotPlaying;
             MessageQueue = _MessageQueue;
             player.MediaEnded += AfterPlay;
             index = 1;
@@ -66,7 +66,7 @@ namespace musicplayer.Modules
                     break;
             }
             nowPlaying = null;
-            status = PlayStatusEmun.NotPlaying;
+            status = PlayStatusEnum.NotPlaying;
             TryToPlayMusic(false);
             MessageQueue.Enqueue(MessageTopicEnum.PlayingUpdate);
             MessageQueue.Enqueue(MessageTopicEnum.StatusUpdate);
@@ -82,7 +82,7 @@ namespace musicplayer.Modules
                     player.Open(song.AudioStream);
                     player.Play();
                     nowPlaying = song;
-                    status = PlayStatusEmun.Play;
+                    status = PlayStatusEnum.Playing;
                     if (IsInternal)
                     {
                         MessageQueue.Enqueue(MessageTopicEnum.PlayingUpdate);
@@ -179,14 +179,14 @@ namespace musicplayer.Modules
         {
             if (nowPlaying is not null)
             {
-                if (status == PlayStatusEmun.Play)
+                if (status == PlayStatusEnum.Playing)
                 {
-                    status = PlayStatusEmun.Pause;
+                    status = PlayStatusEnum.Pause;
                     player.Pause();
                 }
                 else
                 {
-                    status = PlayStatusEmun.Play;
+                    status = PlayStatusEnum.Playing;
                     player.Play();
                 }
             }

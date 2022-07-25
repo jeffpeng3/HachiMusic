@@ -1,4 +1,5 @@
-﻿using musicplayer.Modules;
+﻿using musicplayer.Enums;
+using musicplayer.Modules;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -26,12 +27,34 @@ namespace musicplayer.Controls
         {
             InitializeComponent();
         }
+        private void PlayButtonClick(object sender, RoutedEventArgs e)
+        {
+            if (sender is not Button)
+                return;
+            if (Player.CurrentPlayer is not Player player)
+                return;            
+            switch (Player.Status)
+            {
+                case PlayStatusEnum.NotPlaying:
+                    player.Play(0);
+                    PlayButton.Content = FindResource("PauseIcon");
+                    break;
+                case PlayStatusEnum.Playing:
+                    player.Pause();
+                    PlayButton.Content = FindResource("PlayIcon");
+                    break;
+                case PlayStatusEnum.Pause:
+                    player.Resume();
+                    PlayButton.Content = FindResource("PauseIcon");
+                    break;
+            }
+        }
         private void LoopButtonClick(object sender, RoutedEventArgs e)
         {
-            if (sender is not Button btn)
+            if (sender is not Button button)
                 return;
             Player.LoopMode = Player.LoopMode.Next();
-            btn.Content = FindResource(Enum.GetName(Player.LoopMode));
+            button.Content = FindResource(Enum.GetName(Player.LoopMode));
         }
     }
 }

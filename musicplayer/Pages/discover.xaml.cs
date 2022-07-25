@@ -34,7 +34,7 @@ namespace musicplayer.Pages
                 {
                     Title = item.Title,
                     Artist = item.Author.ChannelTitle,
-                    Dutation = (TimeSpan)item.Duration,
+                    Duration = (TimeSpan)item.Duration,
                     Height = 55,
                     Margin = new Thickness(0, 5, 0, 0),
                     Tag = item.Id,

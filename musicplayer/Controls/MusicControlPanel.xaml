@@ -8,6 +8,9 @@
              mc:Ignorable="d" 
              d:DesignHeight="100" d:DesignWidth="600">
     <Control.Resources>
+        <ui:SymbolIcon x:Key="PlayIcon" Symbol="Play24" FontSize="6"/>
+        <ui:SymbolIcon x:Key="PauseIcon" Symbol="Pause24" FontSize="6"/>
+
         <ui:FontIcon x:Key="LoopNone"  Glyph="&#xf5e7;" FontFamily="{DynamicResource SegoeFluentIcons}" FontSize="6"/>
         <ui:FontIcon x:Key="LoopSingle"  Glyph="&#xe8ed;" FontFamily="{DynamicResource SegoeFluentIcons}" FontSize="6"/>
         <ui:FontIcon x:Key="LoopAll"  Glyph="&#xe8ee;" FontFamily="{DynamicResource SegoeFluentIcons}" FontSize="6"/>
@@ -88,10 +91,12 @@
 
         <Viewbox Margin="10,15,10,5">
             <Grid.Column>7</Grid.Column>
-            <ui:Button BorderThickness="0" Background="Gray" Padding="0,0,0,0">
+            <ui:Button x:Name="PlayButton" BorderThickness="0" 
+                       Background="Gray" Padding="0,0,0,0"
+                       Click="PlayButtonClick">
                 <ui:Button.Width>10</ui:Button.Width>
                 <ui:Button.Height>10</ui:Button.Height>
-                <ui:SymbolIcon Symbol="Play24" FontSize="6"/>
+                <DynamicResource ResourceKey="PlayIcon"/>
             </ui:Button>
         </Viewbox>
 
