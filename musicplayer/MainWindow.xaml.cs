@@ -118,12 +118,10 @@ namespace musicplayer
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
         }
-
         private void OnAnyControlPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             //Console.WriteLine(e.PropertyName);
         }
-
         private void LoopButtonClick(object sender, RoutedEventArgs e)
         {
             if (sender is not Button btn)
