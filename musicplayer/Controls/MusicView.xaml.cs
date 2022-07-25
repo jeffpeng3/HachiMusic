@@ -28,9 +28,8 @@ namespace musicplayer.Controls
                 return null;
 
             var T1 = youtube.Videos.GetAsync(url);
-            var T2 = Utils.GetMaxResolutionAsync(url);
             var MusicMetadata = await T1;
-
+            var T2 = Utils.GetMaxResolutionAsync(MusicMetadata.Id);
             MusicView musicView = new()
             {
                 Title = MusicMetadata.Title,
