@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Windows;
 using Wpf.Ui.Controls;
 using musicplayer.Enums;
@@ -14,18 +14,10 @@ namespace musicplayer
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : UiWindow, INotifyPropertyChanged
+    public partial class MainWindow : UiWindow
     {
-        public event PropertyChangedEventHandler? PropertyChanged = delegate { };
-        private bool _IsPadOpen;
-        public bool IsPadOpen
-        {
-            set { _IsPadOpen = value; OnPropertyChanged("IsPadOpen"); }
-            get { return _IsPadOpen; }
-        }
         public MainWindow()
         {
-            IsPadOpen = true;
             InitializeComponent();
             _ = new Player();
         }
@@ -62,10 +54,6 @@ namespace musicplayer
                 var page = RootFrame.Content as DiscoverPage;
                 _ = page?.SearchAsync(TargetString);
             }
-        }
-        private void PadOpenOrClose(object sender, RoutedEventArgs e)
-        {
-            IsPadOpen = !IsPadOpen;
         }
         private async void WindowMove(object sender, MouseButtonEventArgs e)
         {
@@ -113,21 +101,6 @@ namespace musicplayer
         private void WindowMin(object sender, RoutedEventArgs e)
         {
             WindowState = WindowState.Minimized;
-        }
-        protected void OnPropertyChanged(string propName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
-        }
-        private void OnAnyControlPropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            //Console.WriteLine(e.PropertyName);
-        }
-        private void LoopButtonClick(object sender, RoutedEventArgs e)
-        {
-            if (sender is not Button btn)
-                return;
-            Player.LoopMode = Player.LoopMode.Next();
-            btn.Content = FindResource(Enum.GetName(Player.LoopMode));
         }
     }
 }

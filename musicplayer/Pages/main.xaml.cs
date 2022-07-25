@@ -13,6 +13,7 @@ namespace musicplayer.Pages
         public MainPage()
         {
             InitializeComponent();
+            /*
             for (int i = 0; i < 10; i++)
             {
                 MusicView musicView = new()
@@ -26,6 +27,7 @@ namespace musicplayer.Pages
                 };
                 QueueList.Items.Add(musicView);
             }
+            */
         }
     }
 }

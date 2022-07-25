@@ -36,7 +36,6 @@ namespace musicplayer.Modules
         {
             SongList.Add(song);
         }
-
         public async void AddSong(string url)
         {
             var song = await Song.TryCreateSongAsync(url);
