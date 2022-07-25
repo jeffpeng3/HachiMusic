@@ -34,7 +34,7 @@
             <Label.Margin>5,5,0,0</Label.Margin>
             <TextBlock Text="{Binding Path=Artist, ElementName=MyMusicView}" ToolTip="{Binding Path=Artist, ElementName=MyMusicView}" TextTrimming="CharacterEllipsis"/>
         </Label>
-        <Label Content="{Binding Path=Dutation, ElementName=MyMusicView}">
+        <Label Content="{Binding Path=Duration, ElementName=MyMusicView}">
             <Grid.Column>2</Grid.Column>
             <Grid.RowSpan>2</Grid.RowSpan>
             <Label.Margin>0,0,8,0</Label.Margin>

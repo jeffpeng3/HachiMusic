@@ -32,7 +32,7 @@ namespace musicplayer.Controls
             if (sender is not Button)
                 return;
             if (Player.CurrentPlayer is not Player player)
-                return;            
+                return;
             switch (Player.Status)
             {
                 case PlayStatusEnum.NotPlaying:
@@ -48,6 +48,21 @@ namespace musicplayer.Controls
                     PlayButton.Content = FindResource("PauseIcon");
                     break;
             }
+        }
+        private void RandomButtonClick(object sender, RoutedEventArgs e)
+        {
+            if (sender is not Button button)
+                return;
+            switch (Player.IsRandom)
+            {
+                case true:
+                    button.Background = new SolidColorBrush(Colors.Gray);
+                    break;
+                case false:
+                    button.Background = new SolidColorBrush(Color.FromRgb(85, 85, 85));
+                    break;
+            }
+            Player.IsRandom ^= true;
         }
         private void LoopButtonClick(object sender, RoutedEventArgs e)
         {
