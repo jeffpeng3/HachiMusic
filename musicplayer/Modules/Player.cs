@@ -11,11 +11,7 @@ namespace musicplayer.Modules
         // List<int> ReapeatTimes;
         public static int ListIndex { get; private set; } = 0;
         public static double Volume { get; set; } = 0.5;
-        public static bool isMute
-        {
-            get;
-            set;
-        }
+        public static bool isMute { get; set; } = false;
         public static TimeSpan Position { get; set; } = TimeSpan.Zero;
         public static PlayStatusEmun Status { get; set; } = PlayStatusEmun.NotPlaying;
         public static LoopModeEnum LoopMode { get; set; } = LoopModeEnum.LoopNone;
@@ -40,9 +36,18 @@ namespace musicplayer.Modules
         {
 
         }
-        public void AddSong(string url)
+        public void AddSong(Song song)
         {
+            SongList.Add(song);
+        }
 
+        public async void AddSong(string url)
+        {
+            var song = await Song.TryCreateSongAsync(url);
+            if (song is not null)
+            {
+                AddSong(song);
+            }
         }
         public void AfterPlay()
         {
