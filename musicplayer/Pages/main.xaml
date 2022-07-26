@@ -7,10 +7,10 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
     xmlns:local="clr-namespace:musicplayer.Pages"
     xmlns:my="clr-namespace:musicplayer.Controls"
+    xmlns:conv="clr-namespace:musicplayer.Modules"
     mc:Ignorable="d" 
     d:DesignHeight="390" d:DesignWidth="360"
     Title="MainPage">
-
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
