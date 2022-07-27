@@ -13,30 +13,18 @@ namespace musicplayer.Modules
 {
     public class Song2MusicViewConverter
     {
-        public static async Task<ObservableCollection<MusicView?>?> ConvertAsync(object value)
+        public static ObservableCollection<MusicView?>? Convert(object value)
         {
             ObservableCollection<MusicView?> convertible = new();
-
             if (value is not ObservableCollection<Song> result)
             {
                 return null;
             }
-            List<Task<MusicView?>> TaskList = new();
             foreach (var item in result)
             {
-                TaskList.Add(MusicView.TryToCreateMusicViewAsync($"https://www.youtube.com/watch?v={item.VideoId}"));
-            }
-            await Task.WhenAny(TaskList.ToArray());
-            foreach (var item in TaskList)
-            {
-                convertible.Add(await item.ConfigureAwait(false));
+                convertible.Add(new MusicView(item));
             }
             return convertible;
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return DependencyProperty.UnsetValue;
         }
     }
     public static class Extensions

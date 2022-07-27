@@ -28,7 +28,7 @@ namespace musicplayer.Pages
             {
                 return;
             }
-            QueueList.ItemsSource = await Song2MusicViewConverter.ConvertAsync(SongList);
+            QueueList.ItemsSource = Song2MusicViewConverter.Convert(SongList);
         }
     }
 }
