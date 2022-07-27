@@ -8,6 +8,9 @@ using System.Windows.Input;
 using System.ComponentModel;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.Threading;
+using Wpf.Ui.Mvvm.Services;
+using Wpf.Ui.Controls.Interfaces;
+using Wpf.Ui.Mvvm.Contracts;
 
 namespace musicplayer
 {
@@ -82,7 +85,7 @@ namespace musicplayer
         }
         private void WindowClose(object sender, RoutedEventArgs e)
         {
-            Close();
+            Visibility = Visibility.Collapsed;
         }
         private void WindowMaxOrNormal(object sender, RoutedEventArgs e)
         {
