@@ -4,7 +4,8 @@
                 xmlns:local="clr-namespace:musicplayer"
                 StartupUri="MainWindow.xaml"    
                 xmlns:xf="clr-namespace:XamlFlair;assembly=XamlFlair.WPF"
-                xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml">
+                xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+                >
     <Application.Resources>
         <ResourceDictionary>
             <FontFamily x:Key="SegoeFluentIcons">pack://application:,,,/;component/Resources/#Segoe Fluent Icons</FontFamily>

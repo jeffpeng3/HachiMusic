@@ -5,12 +5,11 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using Wpf.Ui.Controls;
+using Wpf.Ui.Styles.Controls;
 
 namespace musicplayer
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
     public partial class App : Application
     {
     }
