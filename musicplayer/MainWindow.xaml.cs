@@ -11,6 +11,7 @@ using Microsoft.VisualStudio.Threading;
 using Wpf.Ui.Mvvm.Services;
 using Wpf.Ui.Controls.Interfaces;
 using Wpf.Ui.Mvvm.Contracts;
+using System.Diagnostics.CodeAnalysis;
 
 namespace musicplayer
 {
@@ -24,6 +25,24 @@ namespace musicplayer
             InitializeComponent();
             _ = new Player();
         }
+
+        private void ExitClick(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+        private void NextClick(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+        private void PreviousClick(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+        private void PlayPauseClick(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
         private async void OnSearch(object sender, KeyEventArgs e)
         {
             if (e.Key != Key.Enter)
@@ -105,5 +124,6 @@ namespace musicplayer
         {
             WindowState = WindowState.Minimized;
         }
+
     }
 }
