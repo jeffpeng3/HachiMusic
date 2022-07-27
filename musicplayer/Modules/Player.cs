@@ -1,11 +1,14 @@
 ﻿using System;
+using NAudio.Wave;
 using musicplayer.Enums;
+using NAudio.Wave.SampleProviders;
 using System.Collections.ObjectModel;
 
 namespace musicplayer.Modules
 {
     public class Player
     {
+        private static readonly WaveOut waveOut = new();
         public static readonly ObservableCollection<Song> SongList = new();
 
         // List<int> ReapeatTimes;
@@ -20,21 +23,32 @@ namespace musicplayer.Modules
         public Player()
         {
             CurrentPlayer = this;
+            waveOut.PlaybackStopped += AfterPlay;
         }
         public void Play(int index = -1)
         {
+            if (SongList.Count == 0)
+                return;
             Status = PlayStatusEnum.Playing;
+            index = index < 0 ? ListIndex : index;
+            var currSong = SongList[index];
+
+            WaveStream MFR = new MediaFoundationReader(currSong.AudioStream.ToString());
+            VolumeSampleProvider VSP = new(MFR.ToSampleProvider());
+            VSP.Volume = 0.05f;
+            waveOut.Init(VSP);
+            waveOut.Play();
 
         }
         public void Resume()
         {
             Status = PlayStatusEnum.Playing;
-
+            waveOut.Resume();
         }
         public void Pause()
         {
             Status = PlayStatusEnum.Pause;
-
+            waveOut.Pause();
         }
         public void AddSong(Song song)
         {
@@ -48,9 +62,27 @@ namespace musicplayer.Modules
                 AddSong(song);
             }
         }
-        public void AfterPlay()
+        private void AfterPlay(object sender, StoppedEventArgs e)
         {
-
+            if(IsRandom)
+            {
+                // do random
+                return;
+            }
+            if (LoopMode != LoopModeEnum.LoopSingle)
+                ListIndex++;
+            if(ListIndex >= SongList.Count)
+            {
+                if (LoopMode == LoopModeEnum.LoopAll)
+                    ListIndex = 0;
+                else
+                {
+                    Status = PlayStatusEnum.NotPlaying;
+                    // tell front-end that need to render
+                    return;
+                }
+            }
+            Play(ListIndex);
         }
         public Song NowPlaying()
         {
