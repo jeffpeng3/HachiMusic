@@ -40,8 +40,6 @@ namespace musicplayer.Modules
             {
                 return null;
             }
-            Uri? targetUrl;
-            targetUrl = new Uri(url);
             var T1 = youtube.Videos.GetAsync(url);
             var T2 = youtube.Videos.Streams.GetManifestAsync(url);
             var MusicMetadata = await T1;

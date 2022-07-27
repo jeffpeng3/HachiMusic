@@ -22,6 +22,16 @@ namespace musicplayer.Controls
 
         public static readonly DependencyProperty srcProperty = DependencyProperty.Register("Src", typeof(Uri), typeof(MusicView), new FrameworkPropertyMetadata(new Uri("https://img.youtube.com/vi/%3Cinsert-youtube-video-id-here%3E/maxresdefault.jpg")));
 
+        public MusicView(Song song)
+        {
+            InitializeComponent();
+            Title = song.Title;
+            Artist = song.Artist;
+            Duration = song.Duration;
+            Src = song.Thumbnail;
+            Height = 55;
+            Margin = new Thickness(0, 5, 0, 0);
+        }
         public static async Task<MusicView?> TryToCreateMusicViewAsync(string url)
         {
             if (!Utils.IsValidAddress(url))
