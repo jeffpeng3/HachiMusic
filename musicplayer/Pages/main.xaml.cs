@@ -16,6 +16,7 @@ namespace musicplayer.Pages
     /// </summary>
     public partial class MainPage : UiPage
     {
+
         public MainPage()
         {
             InitializeComponent();
