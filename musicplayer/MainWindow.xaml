@@ -13,6 +13,7 @@
         ExtendsContentIntoTitleBar ="True"
         x:Class="musicplayer.MainWindow"
         mc:Ignorable="d"
+        Icon="./Resources/icon.png"
         Title="MainWindow" Height="850" Width="900" WindowCornerPreference="Round" MouseLeftButtonDown="WindowMove">
     <ui:UiWindow.Resources>
         <ui:SymbolIcon x:Key="window_dismiss" Symbol="Dismiss16"/>
@@ -44,8 +45,8 @@
             </Style.Triggers>
         </Style>
 
-
     </ui:UiWindow.Resources>
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
@@ -59,18 +60,34 @@
             <RowDefinition Height="120" />
             <!--should be const after dashboard created-->
         </Grid.RowDefinitions>
-        <!--
-            <RowDefinition Height="1*" />
-        -->
-
-        <!--  <ui:Button Style="{StaticResource ForPad}" Click="PadOpenOrClose">
-            <ui:Button.Margin>5,5,10,5</ui:Button.Margin>
-            <ui:Button.Padding>0</ui:Button.Padding>
-            <Grid.Column>0</Grid.Column>
-            <ui:Button.BorderThickness>0</ui:Button.BorderThickness>
-            <ui:Button.Background>Transparent</ui:Button.Background>
-            <ui:Button.HorizontalAlignment>right</ui:Button.HorizontalAlignment>
-        </ui:Button>-->
+        <ui:TitleBar Visibility="Hidden" Title="">
+            <Grid.ColumnSpan>2</Grid.ColumnSpan>
+            <ui:TitleBar.Tray>
+                <ui:NotifyIcon  x:Name="notifyIcon"
+                                Icon="./Resources/icon.png"
+                                FocusOnLeftClick="True"
+                                MenuOnRightClick="True"
+                                TooltipText="WPF UI">
+                    <ui:NotifyIcon.Menu>
+                        <ContextMenu>
+                            <ui:MenuItem
+                                Header="Play / Pause"
+                                SymbolIcon="VideoPlayPause20"/>
+                            <ui:MenuItem
+                                Header="Previous"
+                                SymbolIcon="Previous20"/>
+                            <ui:MenuItem
+                                Header="Next"
+                                SymbolIcon="Next20"/>
+                            <ui:MenuItem
+                                Click="ExitClick"
+                                Header="Exit"
+                                SymbolIcon="ArrowExit20"/>
+                        </ContextMenu>
+                    </ui:NotifyIcon.Menu>
+                </ui:NotifyIcon>
+            </ui:TitleBar.Tray>
+        </ui:TitleBar>
 
         <Grid>
             <Grid.Column>1</Grid.Column>

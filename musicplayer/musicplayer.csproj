@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <None Remove="Resources\Back.png" />
+    <None Remove="Resources\icon.png" />
     <None Remove="Resources\LoopAll.png" />
     <None Remove="Resources\LoopAll.svg" />
     <None Remove="Resources\LoopNone.png" />
@@ -46,6 +47,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resources\icon.png" />
     <Resource Include="Resources\Segoe Fluent Icons.ttf" />
   </ItemGroup>
 
