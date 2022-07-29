@@ -33,10 +33,12 @@ namespace musicplayer.Controls
                 return;
             if (Player.CurrentPlayer is not Player player)
                 return;
+            if (Player.SongList.Count == 0)
+                return;
             switch (Player.Status)
             {
                 case PlayStatusEnum.NotPlaying:
-                    player.Play(0);
+                    _ = player.Play(0);
                     PlayButton.Content = FindResource("PauseIcon");
                     break;
                 case PlayStatusEnum.Playing:

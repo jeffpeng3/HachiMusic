@@ -18,13 +18,27 @@ namespace musicplayer.Controls
         public static readonly DependencyProperty MuteProperty = DependencyProperty.Register("Mute", typeof(bool), typeof(MusicView), new FrameworkPropertyMetadata(false));
         public double Value
         {
-            get { return (double)GetValue(ValueProperty); }
-            set { if (Mute) Mute = false; value = Math.Max(0, Math.Min(1, value)); SetValue(ValueProperty, value); ChangeIcon(value); Player.Volume = value; OnPropertyChanged("Value"); }
+            get => (double)GetValue(ValueProperty);
+            set
+            {
+                if (Mute)
+                    Mute = false;
+
+                value = Math.Max(0, Math.Min(1, value));
+                SetValue(ValueProperty, value);
+                ChangeIcon(value);
+                Player.Volume = value;
+                OnPropertyChanged("Value");
+            }
         }
         public bool Mute
         {
-            get { return (bool)GetValue(MuteProperty); }
-            set { SetValue(MuteProperty, value); OnPropertyChanged("Mute"); }
+            get => (bool)GetValue(MuteProperty);
+            set
+            {
+                SetValue(MuteProperty, value);
+                OnPropertyChanged("Mute");
+            }
         }
         public HideableSlider()
         {

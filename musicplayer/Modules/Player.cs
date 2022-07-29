@@ -3,17 +3,30 @@ using NAudio.Wave;
 using musicplayer.Enums;
 using NAudio.Wave.SampleProviders;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 
 namespace musicplayer.Modules
 {
     public class Player
     {
         private static readonly WaveOut waveOut = new();
+        private static WaveStream? MFR;
+        private static VolumeSampleProvider? VSP;
         public static readonly ObservableCollection<Song> SongList = new();
 
         // List<int> ReapeatTimes;
         public static int ListIndex { get; private set; } = 0;
-        public static double Volume { get; set; } = 0.5;
+        private static double _Volume = 0.5;
+        public static double Volume
+        {
+            get => _Volume;
+            set
+            {
+                _Volume = value;
+                if (VSP is not null)
+                    VSP.Volume = (float)_Volume * (float)_Volume * (float)_Volume;
+            }
+        }
         public static bool IsMute { get; set; } = false;
         public static bool IsRandom { get; set; } = false;
         public static TimeSpan Position { get; set; } = TimeSpan.Zero;
@@ -25,7 +38,7 @@ namespace musicplayer.Modules
             CurrentPlayer = this;
             waveOut.PlaybackStopped += AfterPlay;
         }
-        public void Play(int index = -1)
+        public async Task Play(int index = -1)
         {
             if (SongList.Count == 0)
                 return;
@@ -33,12 +46,11 @@ namespace musicplayer.Modules
             index = index < 0 ? ListIndex : index;
             var currSong = SongList[index];
 
-            WaveStream MFR = new MediaFoundationReader(currSong.AudioStream.ToString());
-            VolumeSampleProvider VSP = new(MFR.ToSampleProvider());
-            VSP.Volume = 0.05f;
+            MFR = new MediaFoundationReader(currSong.AudioStream.ToString());
+            VSP = new(MFR.ToSampleProvider());
+            Volume = 0.5f;
             waveOut.Init(VSP);
-            waveOut.Play();
-
+            await Task.Run(() => waveOut.Play());
         }
         public void Resume()
         {
@@ -62,27 +74,27 @@ namespace musicplayer.Modules
                 AddSong(song);
             }
         }
-        private void AfterPlay(object sender, StoppedEventArgs e)
+        private void AfterPlay(object? sender, StoppedEventArgs e)
         {
-            if(IsRandom)
+            Console.WriteLine("After peeyan.");
+            if (IsRandom)
             {
                 // do random
                 return;
             }
             if (LoopMode != LoopModeEnum.LoopSingle)
                 ListIndex++;
-            if(ListIndex >= SongList.Count)
+            if (ListIndex >= SongList.Count)
             {
-                if (LoopMode == LoopModeEnum.LoopAll)
-                    ListIndex = 0;
-                else
+                if (LoopMode != LoopModeEnum.LoopAll)
                 {
                     Status = PlayStatusEnum.NotPlaying;
                     // tell front-end that need to render
                     return;
                 }
+                ListIndex = 0;
             }
-            Play(ListIndex);
+            _ = Play(ListIndex);
         }
         public Song NowPlaying()
         {
